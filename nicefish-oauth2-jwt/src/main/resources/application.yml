@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: authorization-server
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: "jdbc:mysql://localhost:3306/userservice?autoreconnect=true"
+    password: "root"
+    username: "root"
+    testOnBorrow: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: SELECT 1
+    max-active: 15
+    max-idle: 10
+    max-wait: 8000
+config:
+  oauth2:
+    privateKey: -----BEGIN RSA PRIVATE KEY-----MIIEpAIBAAKCAQEAvNbZCFkfl0OkLu0Q+yhYqlBZ+mrCiOEuPqDyrxJ552Zy+LJFmrGfO+6SqbwreAORy0YjkFFFexNomRv+XJQNA83DOKmkiyp41fazVwupzQo/9XThaY8NJMye0CAfQ3Bgr5zxStUbT8zCbdzVxsFv/+JSRU91HFSkWzntsuY09jHfErR97HCvZHDnaCRp8QEVz96XCh5CRvLb/+kI5Hc9WqOrmmlsU4u13x5ykGBIeOMXhR58Et+PFV7a/JcUyZwujM9luYBHJxfDktUJQw5odsa+rPNf3tTJi7JZV8RAsS1TfXYu6mZwGG76Pn+1vDl7Uo36rw0OYXoW+ITbx3VLaQIDAQABAoIBADFQvm8Sr1BWhtsGaCffGoCn6Uefd9w9SlFqwNX9sj4/IAlYrRrABkClhkGzdXqrG/kFASagQs/oeql5iQzuURPMOY5jpyf82H+wJJe34Qk+AwP8GR3zENCqa1MZAHEhOO7DwrPzQWWuqJv+TwnP3IrrtOaK4J+cbyuvziapPe2JF6L9tHwlbhMlkpgbssnEl1L1Azqs9YC1Ij6t0vBIRivUnkFS+pCVQ9NrP+oRRmTw0LL5YPwXc6tX3v6n+7HHDXjXR/HpIx6N1C4um2sfCvWCPEl4k0YxBW77800EFBomh4lNofHBUKg/OUDYRO8eN7lt5LRI4a7Istav4rTjaC0CgYEA599s1+AvL6OkLGbmwgpVUeVEo4AwxdW1/TfbwH0v/y3g4JSCOH+G7i2apdx0Sqwn6aQ8HWM8XV4eN80j0MjmtY1uGIPqvf6iO0TSKQ5JFXZAeb/L33797ZF0De+idoGi9ExgJhx+zrJjNzqjUm2TFf46rUGBa3bXeNejiMVBRwMCgYEA0H0bDYMYd4higVU9EvX7XlS0sVsbghJG89CPzxSW2wi3VY/DooVy4Irz8m+q1DqugCI30s9mpjWAeLpJks2eC5WDe6Zg4mo2swneDlrBnRBkQjVfMUv8cECkqQ6a1xc5k0qtEqupsx1xfwRBxivi22FfykL/Rj53k0NvuuSOMiMCgYEAm0jj6cb3kt3yqtHXJIgrD4eNajoFb9hp4sUv5D9yj2C4Q27xrsipIoVkFkQHlaKpsC0PHVdCK/1GG3TE0aRZ7ahj3QMriEYpe6vhWyF4DGl/UIoEDQ9NG3bX1CVyFg9HhHhJw/w9aEvLakdY7XD4mjgCL9m4xLF4KDOyD3ya9OUCgYB0NrhEsOWLg6987jmL/ydt7oOGNQXBXFTGhWQUByML1vDytZ9UUVS2i13trocno8ovTGOXk9phHYOOSDDIrurBBEd1PknVC2WQKRjpIXe5CDEKott8DCIbpDzkq2puKNkEHGUa+isu12OzbHkJcN8UcFPH186ZpipbIQT/xXTpxwKBgQDZzfXRGqAmuukz5MjcbvN77u6eTkXASdSKC3nNyWMmTJ1Wn8DU1XcAAiWKiy73TUCfwJx5pdg0/tthnf0ztKeqrbxeS/uU1xkov/YfgOQoJtdJpIVgvYgqzzX/lQCVBl3kod4zAsvprbp5wc6cE0YiPVl8JRNKqu0YoqPxd35nHg==-----END RSA PRIVATE KEY-----
+    publicKey: -----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvNbZCFkfl0OkLu0Q+yhYqlBZ+mrCiOEuPqDyrxJ552Zy+LJFmrGfO+6SqbwreAORy0YjkFFFexNomRv+XJQNA83DOKmkiyp41fazVwupzQo/9XThaY8NJMye0CAfQ3Bgr5zxStUbT8zCbdzVxsFv/+JSRU91HFSkWzntsuY09jHfErR97HCvZHDnaCRp8QEVz96XCh5CRvLb/+kI5Hc9WqOrmmlsU4u13x5ykGBIeOMXhR58Et+PFV7a/JcUyZwujM9luYBHJxfDktUJQw5odsa+rPNf3tTJi7JZV8RAsS1TfXYu6mZwGG76Pn+1vDl7Uo36rw0OYXoW+ITbx3VLaQIDAQAB-----END PUBLIC KEY-----
+    clientid: fish
+    clientSecret: fish
+    accessTokenValiditySeconds: 3600
+    refreshTokenValiditySeconds: 18000
