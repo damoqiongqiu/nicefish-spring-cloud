@@ -20,7 +20,7 @@ public class UserDAO {
 
     public UserEntity getUserDetails(String userName) {
         Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();
-        String userSQLQuery = "select * from users where email_id=?";
+        String userSQLQuery = "select * from auth_user where email_id=?";
         List<UserEntity> list = jdbcTemplate.query(userSQLQuery, new String[]{userName},
                 (ResultSet rs, int rowNum) -> {
                     UserEntity user = new UserEntity();
@@ -40,10 +40,10 @@ public class UserDAO {
 
             if (userEntity.getUser_type() != null) {
                 if (!userEntity.getUser_type().trim().equalsIgnoreCase("super_admin")) {
-                    String permissionQuery = "select distinct p.permission_name from users u inner join role_users r_u on u.id=r_u.user_id "
-                            + "inner join role r on r_u.role_id=r.id "
-                            + "inner join role_permission r_p on r_p.role_id=r.id "
-                            + "inner join permission p on p.id=r_p.permission_id where u.email_id=?";
+                    String permissionQuery = "select distinct p.permission_name from auth_user u inner join auth_role_users r_u on u.id=r_u.user_id "
+                            + "inner join auth_role r on r_u.role_id=r.id "
+                            + "inner join auth_role_permission r_p on r_p.role_id=r.id "
+                            + "inner join auth_permission p on p.id=r_p.permission_id where u.email_id=?";
                     List<String> permissionList = jdbcTemplate.query(permissionQuery.toString(),
                             new String[]{userName}, (ResultSet rs, int rowNum) -> {
                                 return "ROLE_" + rs.getString("permission_name");

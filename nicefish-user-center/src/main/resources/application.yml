@@ -3,7 +3,7 @@ spring:
         name: resource-server
     datasource:
         driverClassName: com.mysql.jdbc.Driver
-        url: "jdbc:mysql://localhost:3306/userservice?autoreconnect=true"
+        url: "jdbc:mysql://localhost:3306/nicefish?autoreconnect=true"
         password: "root"
         username: "root"
         testOnBorrow: true
@@ -22,4 +22,13 @@ security:
         resource:
             filter-order: 3
             jwt:
-                key-value: -----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvNbZCFkfl0OkLu0Q+yhYqlBZ+mrCiOEuPqDyrxJ552Zy+LJFmrGfO+6SqbwreAORy0YjkFFFexNomRv+XJQNA83DOKmkiyp41fazVwupzQo/9XThaY8NJMye0CAfQ3Bgr5zxStUbT8zCbdzVxsFv/+JSRU91HFSkWzntsuY09jHfErR97HCvZHDnaCRp8QEVz96XCh5CRvLb/+kI5Hc9WqOrmmlsU4u13x5ykGBIeOMXhR58Et+PFV7a/JcUyZwujM9luYBHJxfDktUJQw5odsa+rPNf3tTJi7JZV8RAsS1TfXYu6mZwGG76Pn+1vDl7Uo36rw0OYXoW+ITbx3VLaQIDAQAB-----END PUBLIC KEY-----
+                key-value: |
+                    -----BEGIN PUBLIC KEY-----
+                    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvNbZCFkfl0OkLu0Q+yhY
+                    qlBZ+mrCiOEuPqDyrxJ552Zy+LJFmrGfO+6SqbwreAORy0YjkFFFexNomRv+XJQN
+                    A83DOKmkiyp41fazVwupzQo/9XThaY8NJMye0CAfQ3Bgr5zxStUbT8zCbdzVxsFv
+                    /+JSRU91HFSkWzntsuY09jHfErR97HCvZHDnaCRp8QEVz96XCh5CRvLb/+kI5Hc9
+                    WqOrmmlsU4u13x5ykGBIeOMXhR58Et+PFV7a/JcUyZwujM9luYBHJxfDktUJQw5o
+                    dsa+rPNf3tTJi7JZV8RAsS1TfXYu6mZwGG76Pn+1vDl7Uo36rw0OYXoW+ITbx3VL
+                    aQIDAQAB
+                    -----END PUBLIC KEY-----

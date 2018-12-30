@@ -1,16 +1,16 @@
 package com.fish.user.dao;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import com.fish.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UserResourceDAO {
@@ -22,7 +22,7 @@ public class UserResourceDAO {
     
 	public List<UserEntity> getListOfUsers() {
 		
-		Collection<Map<String, Object>> rows3 = jdbcTemplate.queryForList("select * from users");
+		Collection<Map<String, Object>> rows3 = jdbcTemplate.queryForList("select * from auth_user");
 		List<UserEntity> usersList = new ArrayList<>();
 		rows3.stream().map((row) -> {
 			UserEntity user = new UserEntity();
@@ -41,18 +41,18 @@ public class UserResourceDAO {
 	}
 
 	public void deleteUser(String user_id) {
-		jdbcTemplate.update("delete from users where id=?", new Object[] { user_id });
+		jdbcTemplate.update("delete from auth_user where id=?", new Object[] { user_id });
 	}
 
 	public void updateUser(String user_id, UserEntity userEntity) {
-		jdbcTemplate.update("update users set country=?, first_name=?, last_name=?, mobile=? where id=?",
+		jdbcTemplate.update("update auth_user set country=?, first_name=?, last_name=?, mobile=? where id=?",
 				new Object[] { userEntity.getCountry(), userEntity.getFirst_name(), userEntity.getLast_name(),
 						userEntity.getMobile(), user_id });
 	}
 
 	public void createUser(UserEntity userEntity) {
 		jdbcTemplate.update(
-				"insert into users (country, first_name, last_name, mobile, email_id, password, user_type) values "
+				"insert into auth_user (country, first_name, last_name, mobile, email_id, password, user_type) values "
 						+ "(?,?,?,?,?,?,?)",
 				new Object[] { userEntity.getCountry(), userEntity.getFirst_name(), userEntity.getLast_name(),
 						userEntity.getMobile(), userEntity.getEmail_id(), passwordEncoder.encode(userEntity.getPassword()),
@@ -61,7 +61,7 @@ public class UserResourceDAO {
 	
 	
 	public boolean isSuperAdmin(String id) {
-		return jdbcTemplate.queryForObject("select count(id) from users where user_type=? and id=?", new Object[] {"super_admin",id} , Integer.class) >0;
+		return jdbcTemplate.queryForObject("select count(id) from auth_user where user_type=? and id=?", new Object[] {"super_admin",id} , Integer.class) >0;
 	}
 
 }

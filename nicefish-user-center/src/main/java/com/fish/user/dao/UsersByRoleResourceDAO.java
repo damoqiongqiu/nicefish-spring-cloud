@@ -1,14 +1,14 @@
 package com.fish.user.dao;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-
 import com.fish.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 
 @Repository
 public class UsersByRoleResourceDAO {
@@ -19,8 +19,8 @@ public class UsersByRoleResourceDAO {
 	public Object viewUsersByRole(String role_id) {
 
 		Collection<Map<String, Object>> rows3 = jdbcTemplate.queryForList(
-				"select u.id,u.first_name, u.last_name, u.email_id, u.country, u.user_type, u.mobile from users u "
-						+ "inner join role_users role_u on u.id=role_u.user_id " + "where role_u.role_id=?",
+				"select u.id,u.first_name, u.last_name, u.email_id, u.country, u.user_type, u.mobile from auth_user u "
+						+ "inner join auth_role_users role_u on u.id=role_u.user_id " + "where role_u.role_id=?",
 				new Object[] { role_id });
 		List<UserEntity> usersList = new ArrayList<>();
 		rows3.stream().map((row) -> {
@@ -41,9 +41,9 @@ public class UsersByRoleResourceDAO {
 	}
 
 	public void assignUsers2Role(String role_id, ArrayList<String> usersList) { 	
-		jdbcTemplate.update("delete from role_users where role_id=?", new Object[] {role_id});
+		jdbcTemplate.update("delete from auth_role_users where role_id=?", new Object[] {role_id});
 		for(String id:usersList) {
-			jdbcTemplate.update("insert into role_users (role_id, user_id) values (?,?)", new Object[]{role_id,id});
+			jdbcTemplate.update("insert into auth_role_users (role_id, user_id) values (?,?)", new Object[]{role_id,id});
 		}
 	}
 }

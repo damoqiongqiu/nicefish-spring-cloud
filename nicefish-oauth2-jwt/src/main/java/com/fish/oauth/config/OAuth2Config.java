@@ -4,7 +4,6 @@ import com.fish.oauth.util.JwtAccessTokenConverterEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -58,21 +57,12 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.authenticationManager(authenticationManager)
-                .tokenStore(tokenStore())
-                .accessTokenConverter(tokenEnhancer());
-    }
-
-    @Bean
-    public JwtTokenStore tokenStore() {
-        return new JwtTokenStore(tokenEnhancer());
-    }
-
-    @Bean
-    public JwtAccessTokenConverter tokenEnhancer() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverterEnhancer();
         converter.setSigningKey(privateKey);
         converter.setVerifierKey(publicKey);
-        return converter;
+
+        endpoints.authenticationManager(authenticationManager)
+                .tokenStore(new JwtTokenStore(converter))
+                .accessTokenConverter(converter);
     }
 }

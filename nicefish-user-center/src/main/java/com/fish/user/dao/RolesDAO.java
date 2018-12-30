@@ -18,7 +18,7 @@ public class RolesDAO {
 
 	public List<UserRoleEntity> getListOfRoles() {
 
-		Collection<Map<String, Object>> rows3 = jdbcTemplate.queryForList("select * from role order by id asc");
+		Collection<Map<String, Object>> rows3 = jdbcTemplate.queryForList("select * from auth_role order by id asc");
 		List<UserRoleEntity> rolesList = new ArrayList<>();
 		rows3.stream().map((row) -> {
 			UserRoleEntity role = new UserRoleEntity();
@@ -33,15 +33,15 @@ public class RolesDAO {
 	}
 
 	public void deleteRole(String role_id) {
-		jdbcTemplate.update("delete from role where id=?", new Object[] { role_id });
+		jdbcTemplate.update("delete from auth_role where id=?", new Object[] { role_id });
 	}
 
 	public void updateRole(String role_id, UserRoleEntity role) {
-		jdbcTemplate.update("update role set role_name=? where id=?", new Object[] { role.getRole_name(), role_id });
+		jdbcTemplate.update("update auth_role set role_name=? where id=?", new Object[] { role.getRole_name(), role_id });
 	}
 
 	public void createRole(UserRoleEntity role) {
-		jdbcTemplate.update("insert into role (role_name) values (?)", new Object[] { role.getRole_name() });
+		jdbcTemplate.update("insert into auth_role (role_name) values (?)", new Object[] { role.getRole_name() });
 	}
 
 }
