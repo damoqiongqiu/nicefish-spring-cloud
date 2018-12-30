@@ -10,7 +10,6 @@ public class UserEntity {
     private String last_name;
     private String email_id;
     private String password;
-    private String user_type;
     private String mobile;
     private String country;
 
@@ -52,14 +51,6 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getUser_type() {
-        return user_type;
-    }
-
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
     }
 
     public String getMobile() {

@@ -1,9 +1,5 @@
 package com.fish.user.config;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import com.fish.user.AccessTokenMapper;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.JwtAccessTokenConverterConfigurer;
 import org.springframework.security.core.GrantedAuthority;
@@ -11,6 +7,10 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class MyJwtConverter extends DefaultAccessTokenConverter implements JwtAccessTokenConverterConfigurer {
@@ -34,8 +34,6 @@ public class MyJwtConverter extends DefaultAccessTokenConverter implements JwtAc
             details.setCountry((String) map.get("country"));
         if (map.get("mobile") != null)
             details.setMobile((String) map.get("mobile"));
-        if (map.get("user_type") != null)
-            details.setUser_type((String) map.get("user_type"));
         if (auth.getAuthorities() != null && !auth.getAuthorities().isEmpty()) {
             List<String> authorities = new ArrayList<>();
             for (GrantedAuthority gn : auth.getAuthorities()) {

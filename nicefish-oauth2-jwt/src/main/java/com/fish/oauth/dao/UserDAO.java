@@ -19,7 +19,6 @@ public class UserDAO {
     private JdbcTemplate jdbcTemplate;
 
     public UserEntity getUserDetails(String userName) {
-        Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();
         String userSQLQuery = "select * from auth_user where email_id=?";
         List<UserEntity> list = jdbcTemplate.query(userSQLQuery, new String[]{userName},
                 (ResultSet rs, int rowNum) -> {
@@ -30,43 +29,36 @@ public class UserDAO {
                     user.setId(rs.getString("id"));
                     user.setLast_name(rs.getString("last_name"));
                     user.setMobile(rs.getString("mobile"));
-                    user.setUser_type(rs.getString("user_type"));
                     user.setPasssword(rs.getString("password"));
                     return user;
                 });
 
-        if (!list.isEmpty()) {
-            UserEntity userEntity = list.get(0);
-
-            if (userEntity.getUser_type() != null) {
-                if (!userEntity.getUser_type().trim().equalsIgnoreCase("super_admin")) {
-                    String permissionQuery = "select distinct p.permission_name from auth_user u inner join auth_role_users r_u on u.id=r_u.user_id "
-                            + "inner join auth_role r on r_u.role_id=r.id "
-                            + "inner join auth_role_permission r_p on r_p.role_id=r.id "
-                            + "inner join auth_permission p on p.id=r_p.permission_id where u.email_id=?";
-                    List<String> permissionList = jdbcTemplate.query(permissionQuery.toString(),
-                            new String[]{userName}, (ResultSet rs, int rowNum) -> {
-                                return "ROLE_" + rs.getString("permission_name");
-                            });
-                    if (permissionList != null && !permissionList.isEmpty()) {
-                        for (String permission : permissionList) {
-                            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(permission);
-                            grantedAuthoritiesList.add(grantedAuthority);
-                        }
-                        list.get(0).setGrantedAuthoritiesList(grantedAuthoritiesList);
-                    }
-                    return list.get(0);
-                } else {
-                    GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_SUPERADMIN");
-                    grantedAuthoritiesList.add(grantedAuthority);
-                    list.get(0).setGrantedAuthoritiesList(grantedAuthoritiesList);
-                    return list.get(0);
-                }
-            } else {
-                return null;
-            }
+        if(list.isEmpty()){
+            return null;
         }
-        return null;
+
+        UserEntity userEntity = list.get(0);
+        Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();
+        String permissionQuery =
+                "select distinct p.permission_name " +
+                        "from auth_user u " +
+                        "inner join auth_user_role r_u on u.id=r_u.user_id "
+                        + "inner join auth_role r on r_u.role_id=r.id "
+                        + "inner join auth_role_permission r_p on r_p.role_id=r.id "
+                        + "inner join auth_permission p on p.id=r_p.permission_id where u.email_id=?";
+        List<String> permissionList = jdbcTemplate.query(permissionQuery.toString(),
+                new String[]{userName}, (ResultSet rs, int rowNum) -> {
+                    //ROLE_这个前缀是SpringSecurity默认实现里面提供的
+                    return "ROLE_" + rs.getString("permission_name");
+                });
+        if (permissionList != null && !permissionList.isEmpty()) {
+            for (String permission : permissionList) {
+                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(permission);
+                grantedAuthoritiesList.add(grantedAuthority);
+            }
+            userEntity.setGrantedAuthoritiesList(grantedAuthoritiesList);
+        }
+        return userEntity;
     }
 
 }

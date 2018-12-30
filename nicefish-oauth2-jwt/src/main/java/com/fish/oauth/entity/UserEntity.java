@@ -1,25 +1,23 @@
 package com.fish.oauth.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.springframework.security.core.GrantedAuthority;
-
 /**
  * 基本User类，与数据库表字段一一对应。
- *
  * @author 大漠穷秋
  */
 public class UserEntity {
     private String email_id;
     private String passsword;
-    private Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();
     private String id;
     private String first_name;
     private String last_name;
     private String mobile;
     private String country;
-    private String user_type;
+    private Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();
 
     public String getEmail_id() {
         return email_id;
@@ -83,13 +81,5 @@ public class UserEntity {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public String getUser_type() {
-        return user_type;
-    }
-
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
     }
 }

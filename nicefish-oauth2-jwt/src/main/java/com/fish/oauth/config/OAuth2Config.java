@@ -13,6 +13,10 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+/**
+ * OAuth2 服务器配置
+ * @author 大漠穷秋
+ */
 @Configuration
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 

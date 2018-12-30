@@ -32,7 +32,6 @@ public class UserDAO {
 			user.setId(String.valueOf(row.get("id")));
 			user.setLast_name((String) row.get("last_name"));
 			user.setMobile((String) row.get("mobile"));
-			user.setUser_type((String) row.get("user_type"));
 			return user;
 		}).forEach((ss3) -> {
 			usersList.add(ss3);
@@ -52,16 +51,15 @@ public class UserDAO {
 
 	public void createUser(UserEntity userEntity) {
 		jdbcTemplate.update(
-				"insert into auth_user (country, first_name, last_name, mobile, email_id, password, user_type) values "
-						+ "(?,?,?,?,?,?,?)",
+				"insert into auth_user (country, first_name, last_name, mobile, email_id, password) values "
+						+ "(?,?,?,?,?,?)",
 				new Object[] { userEntity.getCountry(), userEntity.getFirst_name(), userEntity.getLast_name(),
-						userEntity.getMobile(), userEntity.getEmail_id(), passwordEncoder.encode(userEntity.getPassword()),
-						userEntity.getUser_type() });
+						userEntity.getMobile(), userEntity.getEmail_id(), passwordEncoder.encode(userEntity.getPassword())});
 	}
 	
 	
 	public boolean isSuperAdmin(String id) {
-		return jdbcTemplate.queryForObject("select count(id) from auth_user where user_type=? and id=?", new Object[] {"super_admin",id} , Integer.class) >0;
+		return jdbcTemplate.queryForObject("select count(id) from auth_user where id=?", new Object[] {"super_admin",id} , Integer.class) >0;
 	}
 
 }

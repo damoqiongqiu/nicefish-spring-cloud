@@ -9,7 +9,6 @@ public class AccessTokenMapper {
     private List<String> authorities = new ArrayList<String>();
     private String first_name;
     private String last_name;
-    private String user_type;
     private String mobile;
     private String country;
 
@@ -43,14 +42,6 @@ public class AccessTokenMapper {
 
     public void setLast_name(String last_name) {
         this.last_name = last_name;
-    }
-
-    public String getUser_type() {
-        return user_type;
-    }
-
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
     }
 
     public String getMobile() {

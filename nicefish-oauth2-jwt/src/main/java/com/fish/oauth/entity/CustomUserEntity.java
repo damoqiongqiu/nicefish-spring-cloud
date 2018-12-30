@@ -15,7 +15,6 @@ public class CustomUserEntity extends User {
     private String last_name;
     private String mobile;
     private String country;
-    private String user_type;
 
     public CustomUserEntity(UserEntity user) {
         super(user.getEmail_id(), user.getPasssword(), user.getGrantedAuthoritiesList());
@@ -24,7 +23,6 @@ public class CustomUserEntity extends User {
         this.last_name = user.getLast_name();
         this.mobile = user.getMobile();
         this.country = user.getCountry();
-        this.user_type = user.getUser_type();
     }
 
     public String getId() {
@@ -65,14 +63,6 @@ public class CustomUserEntity extends User {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    public String getUser_type() {
-        return user_type;
-    }
-
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
     }
 
 }
