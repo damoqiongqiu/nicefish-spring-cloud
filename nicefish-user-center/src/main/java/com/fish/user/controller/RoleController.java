@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class RoleResource {
+public class RoleController {
 
 	@Autowired
     RoleDAO roleDAO;
