@@ -10,7 +10,7 @@ import java.util.Collection;
  * @author 大漠穷秋
  */
 public class UserEntity {
-    private String email_id;
+    private String email;
     private String passsword;
     private String id;
     private String first_name;
@@ -19,12 +19,12 @@ public class UserEntity {
     private String country;
     private Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<>();
 
-    public String getEmail_id() {
-        return email_id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmail_id(String email_id) {
-        this.email_id = email_id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPasssword() {

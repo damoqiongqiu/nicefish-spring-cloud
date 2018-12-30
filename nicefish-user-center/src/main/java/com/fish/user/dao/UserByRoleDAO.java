@@ -19,14 +19,14 @@ public class UserByRoleDAO {
 	public Object viewUsersByRole(String role_id) {
 
 		Collection<Map<String, Object>> rows3 = jdbcTemplate.queryForList(
-				"select u.id,u.first_name, u.last_name, u.email_id, u.country, u.mobile from auth_user u "
+				"select u.id,u.first_name, u.last_name, u.email, u.country, u.mobile from auth_user u "
 						+ "inner join auth_user_role role_u on u.id=role_u.user_id " + "where role_u.role_id=?",
 				new Object[] { role_id });
 		List<UserEntity> usersList = new ArrayList<>();
 		rows3.stream().map((row) -> {
 			UserEntity user = new UserEntity();
 			user.setCountry((String) row.get("country"));
-			user.setEmail_id((String) row.get("email_id"));
+			user.setEmail((String) row.get("email"));
 			user.setFirst_name((String) row.get("first_name"));
 			user.setId(String.valueOf(row.get("id")));
 			user.setLast_name((String) row.get("last_name"));

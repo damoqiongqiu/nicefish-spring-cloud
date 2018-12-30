@@ -15,14 +15,24 @@ public class CustomUserEntity extends User {
     private String last_name;
     private String mobile;
     private String country;
+    private String email;
 
     public CustomUserEntity(UserEntity user) {
-        super(user.getEmail_id(), user.getPasssword(), user.getGrantedAuthoritiesList());
+        super(user.getEmail(), user.getPasssword(), user.getGrantedAuthoritiesList());
         this.id = user.getId();
         this.first_name = user.getFirst_name();
         this.last_name = user.getLast_name();
         this.mobile = user.getMobile();
         this.country = user.getCountry();
+        this.email=user.getEmail();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getId() {

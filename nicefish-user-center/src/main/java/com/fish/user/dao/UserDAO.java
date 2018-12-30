@@ -27,7 +27,7 @@ public class UserDAO {
 		rows3.stream().map((row) -> {
 			UserEntity user = new UserEntity();
 			user.setCountry((String) row.get("country"));
-			user.setEmail_id((String) row.get("email_id"));
+			user.setEmail((String) row.get("email"));
 			user.setFirst_name((String) row.get("first_name"));
 			user.setId(String.valueOf(row.get("id")));
 			user.setLast_name((String) row.get("last_name"));
@@ -51,10 +51,10 @@ public class UserDAO {
 
 	public void createUser(UserEntity userEntity) {
 		jdbcTemplate.update(
-				"insert into auth_user (country, first_name, last_name, mobile, email_id, password) values "
+				"insert into auth_user (country, first_name, last_name, mobile, email, password) values "
 						+ "(?,?,?,?,?,?)",
 				new Object[] { userEntity.getCountry(), userEntity.getFirst_name(), userEntity.getLast_name(),
-						userEntity.getMobile(), userEntity.getEmail_id(), passwordEncoder.encode(userEntity.getPassword())});
+						userEntity.getMobile(), userEntity.getEmail(), passwordEncoder.encode(userEntity.getPassword())});
 	}
 	
 	

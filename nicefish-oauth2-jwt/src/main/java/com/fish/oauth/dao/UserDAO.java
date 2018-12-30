@@ -19,12 +19,12 @@ public class UserDAO {
     private JdbcTemplate jdbcTemplate;
 
     public UserEntity getUserDetails(String userName) {
-        String userSQLQuery = "select * from auth_user where email_id=?";
+        String userSQLQuery = "select * from auth_user where email=?";
         List<UserEntity> list = jdbcTemplate.query(userSQLQuery, new String[]{userName},
                 (ResultSet rs, int rowNum) -> {
                     UserEntity user = new UserEntity();
                     user.setCountry(rs.getString("country"));
-                    user.setEmail_id(userName);
+                    user.setEmail(rs.getString("email"));
                     user.setFirst_name(rs.getString("first_name"));
                     user.setId(rs.getString("id"));
                     user.setLast_name(rs.getString("last_name"));
@@ -45,7 +45,7 @@ public class UserDAO {
                         "inner join auth_user_role r_u on u.id=r_u.user_id "
                         + "inner join auth_role r on r_u.role_id=r.id "
                         + "inner join auth_role_permission r_p on r_p.role_id=r.id "
-                        + "inner join auth_permission p on p.id=r_p.permission_id where u.email_id=?";
+                        + "inner join auth_permission p on p.id=r_p.permission_id where u.email=?";
         List<String> permissionList = jdbcTemplate.query(permissionQuery.toString(),
                 new String[]{userName}, (ResultSet rs, int rowNum) -> {
                     //ROLE_这个前缀是SpringSecurity默认实现里面提供的
