@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class UserResourceDAO {
+public class UserDAO {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;

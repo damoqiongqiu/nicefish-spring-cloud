@@ -15,10 +15,10 @@ public class CustomUserDetailsService implements UserDetailsService {
     UserDAO userDAO;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserEntity userEntity = userDAO.getUserDetails(username);
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        UserEntity userEntity = userDAO.getUserDetails(userName);
         if (userEntity == null || userEntity.getId() == null || "".equalsIgnoreCase(userEntity.getId())) {
-            throw new UsernameNotFoundException("User " + username + " was not found in the database");
+            throw new UsernameNotFoundException("User " + userName + " was not found in the database");
         }
         CustomUserEntity customUser = new CustomUserEntity(userEntity);
         return customUser;
