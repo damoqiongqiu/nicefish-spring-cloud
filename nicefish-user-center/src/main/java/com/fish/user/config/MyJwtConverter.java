@@ -25,7 +25,7 @@ public class MyJwtConverter extends DefaultAccessTokenConverter implements JwtAc
         OAuth2Authentication auth = super.extractAuthentication(map);
         AccessTokenMapper details = new AccessTokenMapper();
         if (map.get("id") != null)
-            details.setId((String) map.get("id"));
+            details.setId((Integer) map.get("id"));
         if (map.get("first_name") != null)
             details.setFirst_name((String) map.get("first_name"));
         if (map.get("last_name") != null)

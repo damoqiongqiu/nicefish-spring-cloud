@@ -5,18 +5,18 @@ import java.util.List;
 
 public class AccessTokenMapper {
 
-    private String id;
+    private Integer id;
     private List<String> authorities = new ArrayList<String>();
     private String first_name;
     private String last_name;
     private String mobile;
     private String country;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
