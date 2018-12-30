@@ -1,20 +1,52 @@
 package com.fish.user.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
 
-@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Set;
+
+/**
+ * 与数据库表字段一一对应。
+ * @author 大漠穷秋
+ */
+@Entity
+@Table(name = "auth_user")
 public class UserEntity {
-
-    private String id;
-    private String first_name;
-    private String last_name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+    @Column(name = "email")
     private String email;
-    private String password;
+    @Column(name = "mobile")
     private String mobile;
+    @Column(name = "password")
+    private String password;
+    @Column(name = "FirstName")
+    private String firstName;
+    @Column(name = "LastName")
+    private String lastName;
+    @Column(name = "country")
     private String country;
+    @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
+    @JoinTable(name = "auth_user_role",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    @JsonIgnore
+    private Set<RoleEntity> roles;
 
-    public String getId() {
+    @Transient
+    private Collection<GrantedAuthority> grantedAuthoritiesList = new ArrayList<GrantedAuthority>();
+
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getEmail() {
@@ -25,24 +57,12 @@ public class UserEntity {
         this.email = email;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getMobile() {
+        return mobile;
     }
 
-    public String getFirst_name() {
-        return first_name;
-    }
-
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
-    }
-
-    public String getLast_name() {
-        return last_name;
-    }
-
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getPassword() {
@@ -53,12 +73,20 @@ public class UserEntity {
         this.password = password;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getCountry() {
@@ -67,5 +95,21 @@ public class UserEntity {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Collection<GrantedAuthority> getGrantedAuthoritiesList() {
+        return grantedAuthoritiesList;
+    }
+
+    public void setGrantedAuthoritiesList(Collection<GrantedAuthority> grantedAuthoritiesList) {
+        this.grantedAuthoritiesList = grantedAuthoritiesList;
+    }
+
+    public Set<RoleEntity> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleEntity> roles) {
+        this.roles = roles;
     }
 }

@@ -14,6 +14,7 @@ import java.util.Collection;
 @Table(name = "auth_user")
 public class UserEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
     @Column(name = "email")
