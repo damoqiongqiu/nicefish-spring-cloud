@@ -1,3 +1,6 @@
+server:
+  port: 9001
+
 spring:
   application:
     name: authorization-server
@@ -27,7 +30,7 @@ mybatis:
 
 config:
   oauth2:
-    clientid: fish
+    clientId: fish
     clientSecret: fish
     accessTokenValiditySeconds: 3600
     refreshTokenValiditySeconds: 18000

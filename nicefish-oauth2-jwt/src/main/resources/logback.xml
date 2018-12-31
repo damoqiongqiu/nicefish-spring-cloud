@@ -5,7 +5,7 @@
     <property name="CONSOLE_LOG_PATTERN" value="%d{yy-MM-dd HH:mm:ss}-[%-5level]-[%class:%method]- %msg %n"/>
     <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSSS} - [Thread:%thread] - [level: %-5level] - [%class : %method : %line] - %msg %n"/>
     <property name="FILE_NAME_PATTERN" value="%d{yyyy-MM-dd}.%i.log"/>
-    <property name="FILE_PATH" value="logs/nicefish-oauth2-jwt.log"/>
+    <property name="FILE_PATH" value="logs/nicefish-oauth2-jwt"/>
     <property name="ROOT_LEVEL" value="debug"/>
 
 

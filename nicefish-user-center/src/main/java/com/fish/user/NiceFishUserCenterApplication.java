@@ -6,9 +6,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 @SpringBootApplication
 @EnableResourceServer
-public class ResourceserverApplication {
+public class NiceFishUserCenterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ResourceserverApplication.class, args);
+        SpringApplication.run(NiceFishUserCenterApplication.class, args);
     }
 }

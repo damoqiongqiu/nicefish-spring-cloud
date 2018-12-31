@@ -7,8 +7,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 
 @SpringBootApplication
 @EnableAuthorizationServer
-public class AuthorizationserverApplication {
+public class NiceFishOAuthApplication {
     public static void main(String[] args) {
-        SpringApplication.run(AuthorizationserverApplication.class, args);
+        SpringApplication.run(NiceFishOAuthApplication.class, args);
     }
 }

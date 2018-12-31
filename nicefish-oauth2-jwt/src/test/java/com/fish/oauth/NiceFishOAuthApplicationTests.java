@@ -12,7 +12,7 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class NicefishOauth2JwtApplicationTests {
+public class NiceFishOAuthApplicationTests {
     @Autowired
     private UserRepository userRepository;
 

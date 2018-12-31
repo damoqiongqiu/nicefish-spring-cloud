@@ -20,8 +20,8 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 
-    @Value("${config.oauth2.clientid}")
-    private String clientid;
+    @Value("${config.oauth2.clientId}")
+    private String clientId;
 
     @Value("${config.oauth2.clientSecret}")
     private String clientSecret;
@@ -51,7 +51,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient(clientid)
+                .withClient(clientId)
                 .secret(clientSecret)
                 .scopes("read", "write", "trust")
                 .authorizedGrantTypes("authorization_code", "implicit", "password", "client_credentials", "refresh_token")
