@@ -42,6 +42,7 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- spring cloud -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter</artifactId>

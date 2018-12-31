@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: nicefish-eureka
+eureka:
+    instance:
+      hostname: localhost
+    client:
+      register-with-eureka: false
+      fetch-registry: false
+      serviceUrl:
+        defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+server:
+  port: 9000
