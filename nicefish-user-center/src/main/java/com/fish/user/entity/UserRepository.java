@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
-    UserEntity findByEmail(String email);
+    List<UserEntity> findByEmail(String email);
     UserEntity findByMobile(String mobile);
     UserEntity findByEmailAndPassword(String email, String password);
     UserEntity findByMobileAndPassword(String mobile, String password);

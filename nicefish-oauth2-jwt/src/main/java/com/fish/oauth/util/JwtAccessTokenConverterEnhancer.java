@@ -22,14 +22,16 @@ public class JwtAccessTokenConverterEnhancer extends JwtAccessTokenConverter {
         Map<String, Object> info = new LinkedHashMap<>(accessToken.getAdditionalInformation());
         if (user.getId() != null)
             info.put("id", user.getId());
-        if (user.getFirst_name() != null)
-            info.put("first_name", user.getFirst_name());
-        if (user.getLast_name() != null)
-            info.put("last_name", user.getLast_name());
+        if (user.getFirstName() != null)
+            info.put("first_name", user.getFirstName());
+        if (user.getLastName() != null)
+            info.put("last_name", user.getLastName());
         if (user.getCountry() != null)
             info.put("country", user.getCountry());
         if (user.getMobile() != null)
             info.put("mobile", user.getMobile());
+        if(user.getEmail()!=null)
+            info.put("email",user.getEmail());
 
         DefaultOAuth2AccessToken customAccessToken = new DefaultOAuth2AccessToken(accessToken);
         customAccessToken.setAdditionalInformation(info);

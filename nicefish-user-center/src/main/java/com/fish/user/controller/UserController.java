@@ -3,10 +3,12 @@ package com.fish.user.controller;
 import com.fish.user.entity.RoleRepository;
 import com.fish.user.entity.UserEntity;
 import com.fish.user.entity.UserRepository;
+import com.fish.user.util.AjaxResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -26,28 +28,41 @@ public class UserController {
 		return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('delete_users')")
-	@RequestMapping(value = "/users/delete/{email}", method = RequestMethod.DELETE)
-	public ResponseEntity<Object> deleteUser(@PathVariable("email") String email) {
-		//TODO:数据保护，不允许删除比自己权限高的用户
-		userRepository.deleteByEmail(email);
-		return new ResponseEntity<>("User deleted successfully", HttpStatus.OK);
-	}
-
-	@PreAuthorize("hasAnyRole('edit_users')")
-	@RequestMapping(value = "/users/modify/{email}", method = RequestMethod.PUT)
-	public ResponseEntity<Object> updateUser(@PathVariable("email") String email, @RequestBody UserEntity userEntity) {
-		//TODO:数据保护，不允许编辑比自己权限高的用户
-		userRepository.save(userEntity);
-		return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
+	@PreAuthorize("hasAnyRole('view_users')")
+	@RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
+	public ResponseEntity<Object> getUserDetail(@PathVariable("id") Integer id) {
+		return new ResponseEntity<>(userRepository.findOne(id), HttpStatus.OK);
 	}
 
 	@PreAuthorize("hasAnyRole('create_users')")
 	@RequestMapping(value = "/users/create", method = RequestMethod.POST)
 	public ResponseEntity<Object> createUser(@RequestBody UserEntity userEntity) {
+		//TODO:加参数校验
+		if(userRepository.findByEmail(userEntity.getEmail()).size()!=0){
+			return new ResponseEntity<>(new AjaxResponseEntity(false,"邮箱已经被使用"), HttpStatus.OK);
+		}
 		//TODO:不允许创建大于或等于自己权限的用户
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 		userRepository.save(userEntity);
-		return new ResponseEntity<>("User created successfully", HttpStatus.OK);
+		return new ResponseEntity<>(new AjaxResponseEntity(true,"创建成功"), HttpStatus.OK);
+	}
+
+	@PreAuthorize("hasAnyRole('edit_users')")
+	@RequestMapping(value = "/users/edit/{id}", method = RequestMethod.POST)
+	public ResponseEntity<Object> updateUser(@PathVariable("id") Integer id, @RequestBody UserEntity userEntity) {
+		//TODO:数据和业务逻辑校验，不准修改邮箱，邮箱格式必须合法
+		//TODO:数据保护，不允许编辑比自己权限高的用户
+		userRepository.save(userEntity);
+		return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
+	}
+
+	@PreAuthorize("hasAnyRole('delete_users')")
+	@RequestMapping(value = "/users/delete/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Object> deleteUser(@PathVariable("id") Integer id) {
+		//TODO:数据保护，不允许删除比自己权限高的用户
+		userRepository.delete(id);
+		return new ResponseEntity<>(new AjaxResponseEntity(true,"删除成功"), HttpStatus.OK);
 	}
 
 	@PreAuthorize("hasAnyRole('view_users_by_role')")
