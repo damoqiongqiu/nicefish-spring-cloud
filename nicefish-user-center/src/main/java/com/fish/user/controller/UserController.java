@@ -44,6 +44,7 @@ public class UserController {
 			return new ResponseEntity<>(new AjaxResponseEntity(false,"邮箱已经被使用"), HttpStatus.OK);
 		}
 		//TODO:不允许创建大于或等于自己权限的用户
+		//TODO:用户创建完成之后自动赋予查看和发帖权限
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 		UserEntity result=userRepository.save(userEntity);
