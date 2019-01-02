@@ -4,6 +4,8 @@ import com.fish.user.entity.RoleRepository;
 import com.fish.user.entity.UserEntity;
 import com.fish.user.entity.UserRepository;
 import com.fish.user.util.AjaxResponseEntity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 
 @RestController
 public class UserController {
+	final static Logger logger = LoggerFactory.getLogger(UserController.class);
 
 	@Autowired
 	UserRepository userRepository;
@@ -34,7 +37,6 @@ public class UserController {
 		return new ResponseEntity<>(userRepository.findOne(id), HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('create_users')")
 	@RequestMapping(value = "/users/create", method = RequestMethod.POST)
 	public ResponseEntity<Object> createUser(@RequestBody UserEntity userEntity) {
 		//TODO:加参数校验
@@ -44,8 +46,10 @@ public class UserController {
 		//TODO:不允许创建大于或等于自己权限的用户
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-		userRepository.save(userEntity);
-		return new ResponseEntity<>(new AjaxResponseEntity(true,"创建成功"), HttpStatus.OK);
+		UserEntity result=userRepository.save(userEntity);
+		result.setPassword("");
+		logger.debug(result.getId().toString());
+		return new ResponseEntity<>(new AjaxResponseEntity(true,"创建成功",result), HttpStatus.OK);
 	}
 
 	@PreAuthorize("hasAnyRole('edit_users')")
