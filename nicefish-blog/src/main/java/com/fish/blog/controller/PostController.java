@@ -21,6 +21,7 @@ public class PostController {
 	@Autowired
 	private PostRepository postRepository;
 
+	//TODO:每页显示的条数改为系统配置项
 	@RequestMapping(value = "/blog/post/{page}", method = RequestMethod.GET)
 	public ResponseEntity<Object> getPostList(@PathVariable(value="page",required = false) Integer page) {
 		if(page==null||page<=0){
