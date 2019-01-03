@@ -1,2 +1,44 @@
 server:
   port: 9003
+
+spring:
+  application:
+    name: blog
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: "jdbc:mysql://localhost:3306/nicefish?autoreconnect=true"
+    password: "root"
+    username: "root"
+    testOnBorrow: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: SELECT 1
+    max-active: 15
+    max-idle: 10
+    max-wait: 8000
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: validate
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+
+mybatis:
+  type-aliases-package: com.fish.oauth.entity
+
+security:
+  oauth2:
+    resource:
+      jwt:
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvNbZCFkfl0OkLu0Q+yhY
+          qlBZ+mrCiOEuPqDyrxJ552Zy+LJFmrGfO+6SqbwreAORy0YjkFFFexNomRv+XJQN
+          A83DOKmkiyp41fazVwupzQo/9XThaY8NJMye0CAfQ3Bgr5zxStUbT8zCbdzVxsFv
+          /+JSRU91HFSkWzntsuY09jHfErR97HCvZHDnaCRp8QEVz96XCh5CRvLb/+kI5Hc9
+          WqOrmmlsU4u13x5ykGBIeOMXhR58Et+PFV7a/JcUyZwujM9luYBHJxfDktUJQw5o
+          dsa+rPNf3tTJi7JZV8RAsS1TfXYu6mZwGG76Pn+1vDl7Uo36rw0OYXoW+ITbx3VL
+          aQIDAQAB
+          -----END PUBLIC KEY-----

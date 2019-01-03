@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class CommentEntity {
     @Id
     @Column(name="CommentId")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String id;
     
 }
