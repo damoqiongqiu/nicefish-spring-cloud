@@ -1,7 +1,7 @@
 package com.fish.blog.controller;
 
-import com.fish.blog.entity.PostEntity;
-import com.fish.blog.entity.PostRepository;
+import com.fish.blog.entity.CommentEntity;
+import com.fish.blog.entity.CommentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,20 +15,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PostController {
-	final static Logger logger = LoggerFactory.getLogger(PostController.class);
+public class CommentController {
+	final static Logger logger = LoggerFactory.getLogger(CommentController.class);
 
 	@Autowired
-	private PostRepository postRepository;
+	private CommentRepository commentRepository;
 
 	//TODO:每页显示的条数改为系统配置项
-	@RequestMapping(value = "/blog/post/{page}", method = RequestMethod.GET)
-	public ResponseEntity<Object> getPostList(@PathVariable(value="page",required = false) Integer page) {
+	@RequestMapping(value = "/blog/comment/{postId}/page/{page}", method = RequestMethod.GET)
+	public ResponseEntity<Object> getPostList(@PathVariable(value="postId") String postId,@PathVariable(value="page",required = false) Integer page) {
 		if(page==null||page<=0){
 			page=1;
 		}
 		page=page-1;
-		Page<PostEntity> postEntities=postRepository.findAll(new PageRequest(page,5));
-		return new ResponseEntity<>(postEntities, HttpStatus.OK);
+		Page<CommentEntity> commentEntities=commentRepository.findByPostId(postId,new PageRequest(page,5));
+		logger.debug(commentEntities.toString());
+		return new ResponseEntity<>(commentEntities, HttpStatus.OK);
 	}
 }

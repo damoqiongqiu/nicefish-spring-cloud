@@ -14,8 +14,8 @@ import java.util.Date;
 public class PostEntity {
     @Id
     @Column(name="PostId")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column(name="PostTitle")
     private String title;
     @Temporal(TemporalType.TIMESTAMP)
@@ -50,11 +50,11 @@ public class PostEntity {
     @Column(name="Status")
     private Integer status;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

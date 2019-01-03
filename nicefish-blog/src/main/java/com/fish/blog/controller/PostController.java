@@ -31,4 +31,10 @@ public class PostController {
 		Page<PostEntity> postEntities=postRepository.findAll(new PageRequest(page,5));
 		return new ResponseEntity<>(postEntities, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/blog/post-detail/{id}",method = RequestMethod.GET)
+	public  ResponseEntity<Object> getPostDetail(@PathVariable(value = "id",required = true) Integer id){
+		PostEntity postEntity=postRepository.findOne(id);
+		return new ResponseEntity<>(postEntity, HttpStatus.OK);
+	}
 }
