@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,7 +31,7 @@ public class CommentController {
 		return new ResponseEntity<>(commentEntities, HttpStatus.OK);
 	}
 
-    //TODO:加鉴权，需要登录权限
+    @PreAuthorize("hasAnyRole('add_comment')")
 	@RequestMapping(value="/blog/comment/write-comment",method = RequestMethod.POST)
 	public ResponseEntity<Object> writeComment(@RequestBody CommentEntity commentEntity){
         commentEntity=commentRepository.save(commentEntity);
