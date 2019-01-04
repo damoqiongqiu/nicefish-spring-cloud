@@ -9,10 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class CommentController {
@@ -23,7 +20,7 @@ public class CommentController {
 
 	//TODO:每页显示的条数改为系统配置项
 	@RequestMapping(value = "/blog/comment/{postId}/page/{page}", method = RequestMethod.GET)
-	public ResponseEntity<Object> getPostList(@PathVariable(value="postId") String postId,@PathVariable(value="page",required = false) Integer page) {
+	public ResponseEntity<Object> getCommentList(@PathVariable(value="postId") String postId,@PathVariable(value="page",required = false) Integer page) {
 		if(page==null||page<=0){
 			page=1;
 		}
@@ -32,4 +29,11 @@ public class CommentController {
 		logger.debug(commentEntities.toString());
 		return new ResponseEntity<>(commentEntities, HttpStatus.OK);
 	}
+
+    //TODO:加鉴权，需要登录权限
+	@RequestMapping(value="/blog/comment/write-comment",method = RequestMethod.POST)
+	public ResponseEntity<Object> writeComment(@RequestBody CommentEntity commentEntity){
+        commentEntity=commentRepository.save(commentEntity);
+        return new ResponseEntity<>(commentEntity, HttpStatus.OK);
+    }
 }

@@ -35,9 +35,11 @@ public class PostController {
 		return new ResponseEntity<>(postEntity, HttpStatus.OK);
 	}
 
+    //TODO:加鉴权，需要登录权限
 	@RequestMapping(value = "/blog/write-post",method = RequestMethod.POST)
 	public ResponseEntity<Object> writePost(@RequestBody PostEntity postEntity){
-		postEntity=postRepository.save(postEntity);
+		//TODO:返回的数据里面没有id，事务问题？
+	    postEntity=postRepository.save(postEntity);
 		return new ResponseEntity<>(postEntity, HttpStatus.OK);
 	}
 }
