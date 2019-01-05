@@ -41,6 +41,7 @@ public class PostEntity {
     private Integer commentTimes;
     @Column(name="UserId")
     private Integer userId;
+    @Basic(optional=true)
     @Column(name="UserName")
     private String userName;
     @Column(name="NickName")
