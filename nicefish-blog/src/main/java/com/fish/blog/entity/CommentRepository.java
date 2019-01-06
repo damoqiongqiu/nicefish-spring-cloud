@@ -5,6 +5,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 /**
  * @author 大漠穷秋
  * @version 创建时间：2018-12-30 20:31
@@ -14,4 +16,11 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
             countQuery = "SELECT count(*) FROM blog_comment WHERE post_id = ?1 ORDER BY ?#{#pageable}",
             nativeQuery = true)
     Page<CommentEntity> findByPostId(String postId,Pageable pageable);
+
+    @Query(value=
+            "select * from blog_comment where user_id=? order by comment_time desc limit ?,?"
+            ,nativeQuery = true)
+    List<CommentEntity> findCommentByUserIdAndPaging(Integer userId, Integer start, Integer limit);
+
+    Long countByUserId(Integer userId);
 }

@@ -30,7 +30,7 @@ public class CommentEntity {
     @Column(name="p_id")
     private String pId;
     @Column(name = "UserId")
-    private String userId;
+    private Integer userId;
     @Column(name = "UserName")
     private String userName;
     @Column(name = "NickName")
@@ -80,11 +80,11 @@ public class CommentEntity {
         this.pId = pId;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
