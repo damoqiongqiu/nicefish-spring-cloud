@@ -26,4 +26,13 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer> {
             "inner join auth_permission p on p.id=r_p.permission_id where u.email=?"
             ,nativeQuery = true)
     List<String> findAuthoritiesByEmail(String email);
+
+    @Query(value=
+            "select * from auth_user order by create_time desc limit ?,?"
+            ,nativeQuery = true)
+    List<UserEntity> findByPageing(Integer start,Integer limit);
+
+    @Query(value="select count(id) from auth_user"
+            ,nativeQuery = true)
+    Long countAllRows();
 }

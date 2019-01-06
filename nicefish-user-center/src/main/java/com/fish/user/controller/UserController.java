@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -24,6 +26,9 @@ public class UserController {
 
 	@Autowired
 	RoleRepository roleRepository;
+
+	//TODO:每页显示的条数改为系统配置项
+	private Integer pageSize=10;
 
 	@PreAuthorize("hasAnyRole('view_users')")
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -81,5 +86,26 @@ public class UserController {
 	public ResponseEntity<Object> assignUsers2Role(@PathVariable("id") Integer roleId, @RequestBody ArrayList<String> usersList) {
 		//TODO:这里需要重新实现
 		return new ResponseEntity<>("Users are assigned to role successfully", HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/users/user-table", method = RequestMethod.POST)
+	public ResponseEntity<Object> getUserListByPaging(@RequestBody HashMap<String,String> params) {
+		Integer page=Integer.valueOf(params.get("page"));
+		if(page==null||page<=0){
+			page=1;
+		}
+		page=page-1;
+
+		List<UserEntity> postEntities=userRepository.findByPageing(page*pageSize,pageSize);
+		Long totalElements=userRepository.countAllRows();
+		Integer totalPages=(int)(totalElements/pageSize+1);
+
+		HashMap<String,Object> resultMap=new HashMap<String,Object>();
+		resultMap.put("totalElements",totalElements);
+		resultMap.put("totalPages",totalPages);
+		resultMap.put("size",pageSize);
+		resultMap.put("content",postEntities);
+
+		return new ResponseEntity<>(resultMap, HttpStatus.OK);
 	}
 }

@@ -1,6 +1,5 @@
 package com.fish.user.config;
 
-import com.fish.user.AccessTokenMapper;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.JwtAccessTokenConverterConfigurer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -30,8 +29,6 @@ public class MyJwtConverter extends DefaultAccessTokenConverter implements JwtAc
             details.setFirst_name((String) map.get("first_name"));
         if (map.get("last_name") != null)
             details.setLast_name((String) map.get("last_name"));
-        if (map.get("country") != null)
-            details.setCountry((String) map.get("country"));
         if (map.get("mobile") != null)
             details.setMobile((String) map.get("mobile"));
         if (auth.getAuthorities() != null && !auth.getAuthorities().isEmpty()) {

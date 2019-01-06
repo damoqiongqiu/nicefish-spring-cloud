@@ -1,4 +1,4 @@
-package com.fish.user;
+package com.fish.user.config;
 
 import java.util.ArrayList;
 import java.util.List;
