@@ -1,4 +1,4 @@
-package com.fish.blog.config;
+package com.fish.user.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

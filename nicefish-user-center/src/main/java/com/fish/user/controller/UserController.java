@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,13 +29,11 @@ public class UserController {
 	//TODO:每页显示的条数改为系统配置项
 	private Integer pageSize=10;
 
-	@PreAuthorize("hasAnyRole('view_users')")
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public ResponseEntity<Object> getListOfUsers() {
 		return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
 	}
 
-    @PreAuthorize("hasAnyRole('view_users', 'SUPERADMIN')")
 	@RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Object> getUserDetail(@PathVariable("id") Integer id) {
 		return new ResponseEntity<>(userRepository.findOne(id), HttpStatus.OK);
@@ -58,7 +55,6 @@ public class UserController {
 		return new ResponseEntity<>(new AjaxResponseEntity(true,"创建成功",result), HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('edit_users')")
 	@RequestMapping(value = "/users/edit/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Object> updateUser(@PathVariable("id") Integer id, @RequestBody UserEntity userEntity) {
 		//TODO:数据和业务逻辑校验，不准修改邮箱，邮箱格式必须合法
@@ -67,7 +63,6 @@ public class UserController {
 		return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('delete_users')")
 	@RequestMapping(value = "/users/delete/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Object> deleteUser(@PathVariable("id") Integer id) {
 		//TODO:数据保护，不允许删除比自己权限高的用户
@@ -75,13 +70,11 @@ public class UserController {
 		return new ResponseEntity<>(new AjaxResponseEntity(true,"删除成功"), HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('view_users_by_role')")
 	@RequestMapping(value = "/roles/{id}/users", method = RequestMethod.GET)
 	public ResponseEntity<Object> viewUsersByRole(@PathVariable("id") Integer roleId) {
 		return new ResponseEntity<>(roleRepository.findOne(roleId).getUsers(), HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('assign_users_to_role')")
 	@RequestMapping(value = "/roles/{id}/users", method = RequestMethod.PUT)
 	public ResponseEntity<Object> assignUsers2Role(@PathVariable("id") Integer roleId, @RequestBody ArrayList<String> usersList) {
 		//TODO:这里需要重新实现
