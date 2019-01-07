@@ -26,11 +26,12 @@ spring:
         show-sql: true
 
 mybatis:
-    type-aliases-package: com.fish.oauth.entity
+    type-aliases-package: com.fish.user.entity
 
 security:
     oauth2:
         resource:
+            filter-order: 3
             jwt:
                 key-value: |
                     -----BEGIN PUBLIC KEY-----

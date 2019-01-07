@@ -36,7 +36,7 @@ public class UserController {
 		return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
 	}
 
-	@PreAuthorize("hasAnyRole('view_users')")
+    @PreAuthorize("hasAnyRole('view_users', 'SUPERADMIN')")
 	@RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Object> getUserDetail(@PathVariable("id") Integer id) {
 		return new ResponseEntity<>(userRepository.findOne(id), HttpStatus.OK);
