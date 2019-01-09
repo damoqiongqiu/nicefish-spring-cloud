@@ -6,8 +6,8 @@
 这是NiceFish的服务端代码，已经完成的功能有：
 
 - 利用SpringSecurity+OAuth2+JWT实现SSO
-- 文章管理
-- 评论管理
+- 文章管理（列表分页查询、新增文章）
+- 评论管理（列表分页查询）
 - 用户管理（注册、登录、SSO）
 
 用到的主要模块：
@@ -28,21 +28,21 @@
 ### 特别注意
 -----------------
 
-- 此项目在 SpringBoot 1.5.9.RELEASE 和 SpringCloud Edgware.RELEASE 测试通过，其它所有版本都未经测试。（SpringBoot和SpringCloud存在版本对应关系，大版本升级可能需要修改非常多的琐碎细节。如果您需要升级版本，请仔细查阅Spring官方的文档，以免浪费大量时间。）
+- 此项目在 SpringBoot 1.5.9.RELEASE 和 SpringCloud Edgware.RELEASE 测试通过，其它所有版本都未经测试。（SpringBoot和SpringCloud存在版本对应关系，版本升级可能需要修改非常多的琐碎细节。如果您需要升级版本，请仔细查阅Spring官方的文档，以免浪费大量时间。）
 - 项目本身的代码是独立的，没有与任何前端技术绑定，因此您可以使用任意前端技术接入。
 
 ### 效果截图
 -----------------
 
-<img src="./doc/1.png">
+<img width="80%" src="./doc/1.png">
 
-<img src="./doc/2.png">
+<img width="80%" src="./doc/2.png">
 
-<img src="./doc/3.png">
+<img width="80%" src="./doc/3.png">
 
-<img src="./doc/4.png">
+<img width="80%" src="./doc/4.png">
 
-<img src="./doc/5.png">
+<img width="80%" src="./doc/5.png">
 
 ### TODO
 -----------------
