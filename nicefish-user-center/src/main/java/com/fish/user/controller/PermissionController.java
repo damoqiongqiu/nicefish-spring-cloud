@@ -25,7 +25,7 @@ public class PermissionController {
 
     @RequestMapping(value = "/roles/{id}/permissions", method = RequestMethod.GET)
     public ResponseEntity<Object> viewPermissionsByRole(@PathVariable("id") Integer roleId) {
-        return new ResponseEntity<>(roleRepository.findOne(roleId).getPermissions(), HttpStatus.OK);
+        return new ResponseEntity<>(roleRepository.findOne(roleId), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/roles/{id}/permissions", method = RequestMethod.PUT)

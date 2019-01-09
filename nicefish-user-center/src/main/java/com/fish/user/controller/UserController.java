@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -72,7 +73,7 @@ public class UserController {
 
 	@RequestMapping(value = "/roles/{id}/users", method = RequestMethod.GET)
 	public ResponseEntity<Object> viewUsersByRole(@PathVariable("id") Integer roleId) {
-		return new ResponseEntity<>(roleRepository.findOne(roleId).getUsers(), HttpStatus.OK);
+		return new ResponseEntity<>(roleRepository.findOne(roleId), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/roles/{id}/users", method = RequestMethod.PUT)
@@ -81,6 +82,7 @@ public class UserController {
 		return new ResponseEntity<>("Users are assigned to role successfully", HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAnyRole('view_users')")
 	@RequestMapping(value = "/users/user-table", method = RequestMethod.POST)
 	public ResponseEntity<Object> getUserListByPaging(@RequestBody HashMap<String,String> params) {
 		Integer page=Integer.valueOf(params.get("page"));

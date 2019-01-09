@@ -1,4 +1,4 @@
-package com.fish.user.config;
+package com.fish.blog.config;
 
 import org.springframework.boot.autoconfigure.security.oauth2.resource.JwtAccessTokenConverterConfigurer;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class MyJwtConverter extends DefaultAccessTokenConverter implements JwtAccessTokenConverterConfigurer {
+public class FishJwtTokenConverter extends DefaultAccessTokenConverter implements JwtAccessTokenConverterConfigurer {
 
     @Override
     public void configure(JwtAccessTokenConverter converter) {

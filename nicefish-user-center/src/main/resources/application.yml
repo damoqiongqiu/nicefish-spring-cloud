@@ -31,6 +31,7 @@ mybatis:
 security:
     oauth2:
         resource:
+            filter-order: 3
             jwt:
                 key-value: |
                     -----BEGIN PUBLIC KEY-----

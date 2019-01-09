@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * 自定义 JWT Token 转换器，把用户名、邮箱、手机号等信息存到Token里面，使用者在拿到JWT的Token时可以直接从里面获取用户资料
- *
+ * @see com.fish.oauth.config.OAuth2Config 里面会使用这个这个自定义的转换器来生成Token
  * @author 大漠穷秋
  */
 public class JwtAccessTokenConverterEnhancer extends JwtAccessTokenConverter {

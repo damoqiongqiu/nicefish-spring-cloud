@@ -58,8 +58,7 @@ public class PostController {
 
 	@RequestMapping(value = "/blog/post-detail/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Object> getPostDetail(@PathVariable(value = "id",required = true) Integer id){
-		PostEntity postEntity=postRepository.findOne(id);
-		return new ResponseEntity<>(postEntity, HttpStatus.OK);
+		return new ResponseEntity<>(postRepository.findOne(id), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/blog/write-post",method = RequestMethod.POST)
