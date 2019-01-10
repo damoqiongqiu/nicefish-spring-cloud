@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * @author 大漠穷秋
+ */
 @RestController
 public class PostController {
 	final static Logger logger = LoggerFactory.getLogger(PostController.class);

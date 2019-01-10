@@ -16,6 +16,14 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
+/**
+ * 注意这里继承的是 ResourceServerConfigurerAdapter，而不是普通的 WebSecurityConfigurerAdapter。
+ * 这里会利用自定义的 FishJwtTokenConverter 来解析 JWT Token 。
+ * @see FishJwtTokenConverter
+ * @see ResourceServerConfigurerAdapter
+ * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+ * @author 大漠穷秋
+ */
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)

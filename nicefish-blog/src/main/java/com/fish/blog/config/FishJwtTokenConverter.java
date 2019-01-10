@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 由于我们在OAuth服务器上给用户资料增加了自定义的字段，所以这里自定义一个JWT Token转换器。
+ * Resource服务器会利用这个转换器解析JWT的Token，从而获得对应的用户资料和授权信息。
+ * @author 大漠穷秋
+ */
 @Component
 public class FishJwtTokenConverter extends DefaultAccessTokenConverter{
     @Override
