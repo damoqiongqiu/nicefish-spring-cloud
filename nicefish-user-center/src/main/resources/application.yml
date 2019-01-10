@@ -25,9 +25,6 @@ spring:
                 dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         show-sql: true
 
-mybatis:
-    type-aliases-package: com.fish.user.entity
-
 security:
     oauth2:
         resource:

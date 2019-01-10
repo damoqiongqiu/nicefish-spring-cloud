@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -61,6 +62,7 @@ public class PostController {
 		return new ResponseEntity<>(postRepository.findOne(id), HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAnyRole('add_post')")
 	@RequestMapping(value = "/blog/write-post",method = RequestMethod.POST)
 	public ResponseEntity<Object> writePost(@RequestBody PostEntity postEntity){
 		//TODO:返回的数据里面没有id，事务问题？
