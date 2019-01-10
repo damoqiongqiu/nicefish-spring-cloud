@@ -22,7 +22,7 @@
 - 在你本地的MySQL里面执行/doc/nicefish.sql
 - 用IDEA打开项目
 - 启动3个模块（任意顺序）：NiceFishBlogApplication.java、NiceFishUserCenterApplication.java、NiceFishOAuthApplication.java
-- 使用Postman或者NiceFish的前端项目来测试后端接口（OAuth服务起在9001端口，用户中心模块起在9002端口，blog相关的模块起在9003端口）
+- 使用Postman或者NiceFish的前端项目来测试后端接口（OAuth服务起在9001端口，用户中心模块起在9002端口，blog相关的模块起在9003端口，内置了一个测试账号damoqiongqiu@126.com，密码12345678，密码对应的MD5是25d55ad283aa400af464c76d713c07ad）
 -  NiceFish的代码在这里，里面有完整的使用说明：https://gitee.com/mumu-osc/NiceFish ，NiceFish与本项目对接的代码位于for-spring-cloud分支上。
 
 ### 特别注意
