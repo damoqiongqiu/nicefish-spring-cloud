@@ -25,6 +25,8 @@ public class PostEntity {
     @Lob
     @Column(name="PostContent",columnDefinition="text")
     private String content;
+    @Column(name="PostSummary")
+    private String summary;
     @Column(name="OriginalUrl")
     private String originalURL;
     @Column(name="PostType")
@@ -169,5 +171,13 @@ public class PostEntity {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 }
