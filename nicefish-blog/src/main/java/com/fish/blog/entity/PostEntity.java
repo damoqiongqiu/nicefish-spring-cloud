@@ -28,19 +28,19 @@ public class PostEntity {
     @Column(name="PostSummary")
     private String summary;
     @Column(name="OriginalUrl")
-    private String originalURL;
+    private String originalURL="";
     @Column(name="PostType")
-    private Integer postType;
+    private Integer postType=0;
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(name="LastModifyTime")
-    private Date lastModifyTime;
+    private Date lastModifyTime=new Date();
     @Column(name = "ReadTimes")
-    private Integer readTimes;
+    private Integer readTimes=1;
     @Column(name="LikedTimes")
-    private Integer likedTimes;
+    private Integer likedTimes=0;
     @Column(name="CommentTimes")
-    private Integer commentTimes;
+    private Integer commentTimes=0;
     @Column(name="UserId")
     private Integer userId;
     @Basic(optional=true)
@@ -49,9 +49,9 @@ public class PostEntity {
     @Column(name="NickName")
     private String nickName;
     @Column(name="EnableComment")
-    private Integer enableComment;
+    private Integer enableComment=1;
     @Column(name="Status")
-    private Integer status;
+    private Integer status=4;
 
     public Integer getId() {
         return id;
