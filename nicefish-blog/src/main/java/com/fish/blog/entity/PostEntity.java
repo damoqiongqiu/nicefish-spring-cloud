@@ -44,8 +44,8 @@ public class PostEntity {
     @Column(name="UserId")
     private Integer userId;
     @Basic(optional=true)
-    @Column(name="UserName")
-    private String userName;
+    @Column(name="Email")
+    private String email;
     @Column(name="NickName")
     private String nickName;
     @Column(name="EnableComment")
@@ -141,12 +141,12 @@ public class PostEntity {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNickName() {

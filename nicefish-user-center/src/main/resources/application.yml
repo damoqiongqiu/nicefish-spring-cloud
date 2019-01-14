@@ -24,6 +24,18 @@ spring:
                     auto: validate
                 dialect: org.hibernate.dialect.MySQL5InnoDBDialect
         show-sql: true
+    cloud:
+        consul:
+            host: 127.0.0.1
+            port: 8500
+            discovery:
+                register: true
+                hostname: localhost
+                serviceName: ${spring.application.name}
+                healthCheckPath: /health
+                healthCheckInterval: 15s
+                tags: ${spring.application.name}
+                instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 
 security:
     oauth2:

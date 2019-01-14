@@ -29,6 +29,8 @@ public class UserEntity {
     private String firstName;
     @Column(name = "LastName")
     private String lastName;
+    @Column(name = "NickName")
+    private String nickName;
     @Column(name = "country")
     private String country;
     @ManyToMany(cascade = CascadeType.PERSIST,fetch = FetchType.LAZY)
@@ -111,5 +113,13 @@ public class UserEntity {
 
     public void setRoles(Set<RoleEntity> roles) {
         this.roles = roles;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

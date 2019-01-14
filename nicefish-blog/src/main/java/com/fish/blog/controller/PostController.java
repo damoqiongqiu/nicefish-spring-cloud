@@ -5,12 +5,15 @@ import com.fish.blog.entity.PostRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +24,9 @@ import java.util.List;
 @RestController
 public class PostController {
 	final static Logger logger = LoggerFactory.getLogger(PostController.class);
+
+	@Autowired
+	private LoadBalancerClient loadBalancer;
 
 	@Autowired
 	private PostRepository postRepository;
@@ -68,8 +74,20 @@ public class PostController {
 	@PreAuthorize("hasAnyRole('add_post')")
 	@RequestMapping(value = "/blog/write-post",method = RequestMethod.POST)
 	public ResponseEntity<Object> writePost(@RequestBody PostEntity postEntity){
+	    //用户相关的服务都在user-center项目中实现，这里调用user-center提供的微服务，获取用户昵称等资料
+		ServiceInstance serviceInstance = loadBalancer.choose("user-center");
+		HashMap<String,Object> serviceResult = new RestTemplate().getForObject(
+				serviceInstance.getUri().toString() + "/users/"+postEntity.getUserId(),
+				HashMap.class);
+
+		logger.debug(serviceResult.toString());
+		//TODO:如果没有查到用户资料，报错返回
+
+		postEntity.setUserId((int)serviceResult.get("id"));
+		postEntity.setEmail((String)serviceResult.get("email"));
+		postEntity.setNickName(serviceResult.get("nickName")==null?"":serviceResult.get("nickName").toString());
 		//TODO:返回的数据里面没有id，事务问题？
-	    postEntity=postRepository.save(postEntity);
+		postEntity=postRepository.save(postEntity);
 		return new ResponseEntity<>(postEntity, HttpStatus.OK);
 	}
 }

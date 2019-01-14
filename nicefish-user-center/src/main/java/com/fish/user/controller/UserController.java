@@ -32,11 +32,6 @@ public class UserController {
 	//TODO:每页显示的条数改为系统配置项
 	private Integer pageSize=10;
 
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
-	public ResponseEntity<Object> getListOfUsers() {
-		return new ResponseEntity<>(userRepository.findAll(), HttpStatus.OK);
-	}
-
 	@RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Object> getUserDetail(@PathVariable("id") Integer id) {
 		return new ResponseEntity<>(userRepository.findOne(id), HttpStatus.OK);
