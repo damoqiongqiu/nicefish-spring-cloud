@@ -45,7 +45,7 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 
 ## Maven Module 模块功能和依赖关系
 
-- nicefish-spring-cloud：这是root项目，通用的依赖模块都定义在这个项目的pom.xml中，子Module会自动继承这里的依赖关系。
+- nicefish-spring-cloud：这是root项目，通用的依赖都定义在这个项目的pom.xml中，子Module会自动继承这里的依赖关系。
 - nicefish-user-center：这是用户中心模块，它是独立的不依赖其它子模块。
 - nicefish-blog：这里实现blog相关的功能，如文章和评论等，依赖nicefish-user-center模块中的配置和UserEntity等。
 - nicefish-oauth2-jwt：这里实现OAuth和JWT相关的功能，依赖nicefish-user-center模块中的UserEntity和Repository等。
@@ -53,8 +53,8 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 
 ## 特别注意
 
-- 此项目在 SpringBoot 1.5.9.RELEASE 和 SpringCloud Edgware.RELEASE 测试通过，其它所有版本都未经测试。（SpringBoot和SpringCloud存在版本对应关系，版本升级可能需要修改非常多的琐碎细节。如果您需要升级版本，请仔细查阅Spring官方的文档，以免浪费大量时间。）
-- 项目本身的代码是独立的，没有与任何前端技术绑定，因此您可以使用任意前端技术接入。
+- ** 此项目在 SpringBoot 1.5.9.RELEASE 和 SpringCloud Edgware.RELEASE 测试通过，其它所有版本都未经测试。（SpringBoot和SpringCloud存在版本对应关系，版本升级可能需要修改非常多的琐碎细节。如果您需要升级版本，请仔细查阅Spring官方的文档，以免浪费大量时间。）**
+- ** 项目本身的代码是独立的，没有与任何前端技术绑定，因此您可以使用任意前端技术接入。 **
 
 ## 效果截图
 
