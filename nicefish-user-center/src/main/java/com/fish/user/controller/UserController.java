@@ -40,7 +40,7 @@ public class UserController {
 	@RequestMapping(value = "/users/create", method = RequestMethod.POST)
 	public ResponseEntity<Object> createUser(@RequestBody UserEntity userEntity) {
 		//TODO:加参数校验
-		if(userRepository.findByEmail(userEntity.getEmail()).size()!=0){
+		if(userRepository.findByEmail(userEntity.getEmail())==null){
 			return new ResponseEntity<>(new AjaxResponseEntity(false,"邮箱已经被使用"), HttpStatus.OK);
 		}
 		//TODO:不允许创建大于或等于自己权限的用户

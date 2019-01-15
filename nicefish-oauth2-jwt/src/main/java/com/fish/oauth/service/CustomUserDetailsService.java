@@ -1,8 +1,8 @@
 package com.fish.oauth.service;
 
 import com.fish.oauth.entity.CustomUserEntity;
-import com.fish.oauth.entity.UserEntity;
-import com.fish.oauth.entity.UserRepository;
+import com.fish.user.entity.UserEntity;
+import com.fish.user.entity.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * 自定义用户详情服务，目的是在用户详情里面增加自定义字段，这些字段会被存储到JWT的Token里面。
- * @see com.fish.oauth.config.SecurityConfig 里面会利用此服务来查询数据库中的用户详情。
+ * @see com.fish.oauth.config.OAuthSecurityConfig 里面会利用此服务来查询数据库中的用户详情。
  * @author 大漠穷秋
  */
 @Service

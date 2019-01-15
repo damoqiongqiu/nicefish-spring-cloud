@@ -39,9 +39,17 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 - 克隆项目到你的本地：git clone https://gitee.com/mumu-osc/nicefish-spring-cloud.git
 - 在你本地的MySQL里面执行/doc/nicefish.sql
 - 用IDEA打开项目
-- 启动3个模块（无顺序）：NiceFishBlogApplication.java、NiceFishUserCenterApplication.java、NiceFishOAuthApplication.java
+- 启动所有模块（无顺序）：NiceFishBlogApplication.java、NiceFishUserCenterApplication.java、NiceFishOAuthApplication.java
 - 使用Postman或者NiceFish的前端项目来测试后端接口（OAuth服务起在9001端口，用户中心模块起在9002端口，blog相关的模块起在9003端口，内置了一个测试账号damoqiongqiu@126.com，密码12345678，密码对应的MD5是25d55ad283aa400af464c76d713c07ad）
 -  NiceFish的代码在这里，里面有完整的使用说明：https://gitee.com/mumu-osc/NiceFish ，NiceFish与本项目对接的代码位于for-spring-cloud分支上。
+
+## Maven Module 模块功能和依赖关系
+
+- nicefish-spring-cloud：这是root项目，通用的依赖模块都定义在这个项目的pom.xml中，子Module会自动继承这里的依赖关系。
+- nicefish-user-center：这是用户中心模块，它是独立的不依赖其它子模块。
+- nicefish-blog：这里实现blog相关的功能，如文章和评论等，依赖nicefish-user-center模块中的配置和UserEntity等。
+- nicefish-oauth2-jwt：这里实现OAuth和JWT相关的功能，依赖nicefish-user-center模块中的UserEntity和Repository等。
+- nicefish-swagger2-api：这里是所有API文档的总入口，依赖nicefish-user-center、nicefish-blog、nicefish-oauth2-jwt模块，解析并生成API文档，访问地址是 http://localhost:9004/swagger-ui.html#/
 
 ## 特别注意
 

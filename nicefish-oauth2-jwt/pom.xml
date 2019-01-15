@@ -16,6 +16,14 @@
     </parent>
 
     <dependencies>
+        <!-- 需要依赖user-center模块的一些类 -->
+        <dependency>
+            <groupId>com.fish</groupId>
+            <artifactId>nicefish-user-center</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- Date Source and JPA -->
         <dependency>
             <groupId>mysql</groupId>

@@ -13,6 +13,7 @@
 		<module>nicefish-oauth2-jwt</module>
 		<module>nicefish-user-center</module>
 		<module>nicefish-blog</module>
+        <module>nicefish-swagger2-api</module>
 	</modules>
 
 	<parent>

@@ -1,34 +1,7 @@
 server:
-  port: 9001
+  port: 9004
 
-spring:
-  application:
-    name: authorization-server
-  datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: "jdbc:mysql://localhost:3306/nicefish?autoreconnect=true"
-    password: "root"
-    username: "root"
-    testOnBorrow: true
-    testWhileIdle: true
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 30000
-    validationQuery: SELECT 1
-    max-active: 15
-    max-idle: 10
-    max-wait: 8000
-  jpa:
-    properties:
-      hibernate:
-        hbm2ddl:
-          auto: validate
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: true
-
-mybatis:
-  type-aliases-package: com.fish.oauth.entity
-
-# è¿™é‡Œä¸ºäº†å…¼å®¹user-centeré‡Œé¢è·å–é…ç½®çš„æ–¹å¼ï¼ŒTODO:éœ€è¦æ”¹å¾—ä¼˜é›…ä¸€ç‚¹
+# ÕâÀïÎªÁË¼æÈİuser-centerÀïÃæ»ñÈ¡ÅäÖÃµÄ·½Ê½£¬TODO:ĞèÒª¸ÄµÃÓÅÑÅÒ»µã
 security:
   oauth2:
     resource:

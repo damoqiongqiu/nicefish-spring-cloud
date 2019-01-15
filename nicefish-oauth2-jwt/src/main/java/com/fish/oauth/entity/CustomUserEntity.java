@@ -1,5 +1,6 @@
 package com.fish.oauth.entity;
 
+import com.fish.user.entity.UserEntity;
 import org.springframework.security.core.userdetails.User;
 
 /**

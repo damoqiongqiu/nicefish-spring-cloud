@@ -1,7 +1,7 @@
 package com.fish.oauth;
 
-import com.fish.oauth.entity.UserEntity;
-import com.fish.oauth.entity.UserRepository;
+import com.fish.user.entity.UserEntity;
+import com.fish.user.entity.UserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
