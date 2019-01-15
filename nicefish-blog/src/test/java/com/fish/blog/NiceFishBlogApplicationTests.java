@@ -12,6 +12,5 @@ public class NiceFishBlogApplicationTests {
     @Test
     public void contextLoads() {
     }
-
 }
 
