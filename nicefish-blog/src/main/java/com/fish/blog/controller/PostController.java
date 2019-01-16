@@ -2,8 +2,7 @@ package com.fish.blog.controller;
 
 import com.fish.blog.entity.PostEntity;
 import com.fish.blog.entity.PostRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
@@ -21,11 +20,10 @@ import java.util.List;
 /**
  * @author 大漠穷秋
  */
+@Slf4j
 @RestController
 @RequestMapping("/blog")
 public class PostController {
-	final static Logger logger = LoggerFactory.getLogger(PostController.class);
-
 	@Autowired
 	private LoadBalancerClient loadBalancer;
 
@@ -82,7 +80,7 @@ public class PostController {
 				serviceInstance.getUri().toString() + "/users/"+postEntity.getUserId(),
 				HashMap.class);
 
-		logger.debug(serviceResult.toString());
+		log.debug(serviceResult.toString());
 		//TODO:如果没有查到用户资料，报错返回
 
 		postEntity.setUserId((int)serviceResult.get("id"));

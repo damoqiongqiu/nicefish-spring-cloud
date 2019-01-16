@@ -2,8 +2,7 @@ package com.fish.blog.controller;
 
 import com.fish.blog.entity.CommentEntity;
 import com.fish.blog.entity.CommentRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,11 +16,10 @@ import java.util.List;
 /**
  * @author 大漠穷秋
  */
+@Slf4j
 @RestController
 @RequestMapping("/blog")
 public class CommentController {
-	final static Logger logger = LoggerFactory.getLogger(CommentController.class);
-
 	@Autowired
 	private CommentRepository commentRepository;
 
@@ -35,7 +33,7 @@ public class CommentController {
 		}
 		page=page-1;
 		Page<CommentEntity> commentEntities=commentRepository.findByPostId(postId,new PageRequest(page,pageSize));
-		logger.debug(commentEntities.toString());
+		log.debug(commentEntities.toString());
 		return new ResponseEntity<>(commentEntities, HttpStatus.OK);
 	}
 
