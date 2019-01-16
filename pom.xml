@@ -14,6 +14,7 @@
 		<module>nicefish-user-center</module>
 		<module>nicefish-blog</module>
         <module>nicefish-swagger2-api</module>
+        <module>nicefish-zuul-server</module>
 	</modules>
 
 	<parent>

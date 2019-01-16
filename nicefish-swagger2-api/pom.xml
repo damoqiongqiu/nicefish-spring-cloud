@@ -2,17 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.fish</groupId>
-    <artifactId>nicefish-swagger2-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>nicefish-swagger2-api</name>
-    <description>Swagger文档入口</description>
-
     <parent>
         <groupId>com.fish</groupId>
         <artifactId>nicefish-spring-cloud</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
+    <groupId>com.fish</groupId>
+    <artifactId>nicefish-swagger2-api</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>nicefish-swagger2-api</name>
+    <description>Swagger文档入口</description>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
@@ -49,6 +49,12 @@
         <dependency>
             <groupId>com.fish</groupId>
             <artifactId>nicefish-oauth2-jwt</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fish</groupId>
+            <artifactId>nicefish-zuul-server</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

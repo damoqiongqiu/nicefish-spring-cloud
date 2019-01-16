@@ -18,6 +18,7 @@ import java.util.List;
  * @author 大漠穷秋
  */
 @RestController
+@RequestMapping("/blog")
 public class CommentController {
 	final static Logger logger = LoggerFactory.getLogger(CommentController.class);
 
@@ -27,7 +28,7 @@ public class CommentController {
 	//TODO:每页显示的条数改为系统配置项
 	private Integer pageSize=10;
 
-	@RequestMapping(value = "/blog/comment/{postId}/page/{page}", method = RequestMethod.GET)
+	@RequestMapping(value = "/comment/{postId}/page/{page}", method = RequestMethod.GET)
 	public ResponseEntity<Object> getCommentList(@PathVariable(value="postId") String postId,@PathVariable(value="page",required = false) Integer page) {
 		if(page==null||page<=0){
 			page=1;
@@ -38,7 +39,7 @@ public class CommentController {
 		return new ResponseEntity<>(commentEntities, HttpStatus.OK);
 	}
 
-	@RequestMapping(value="/blog/comment/write-comment",method = RequestMethod.POST)
+	@RequestMapping(value="/comment/write-comment",method = RequestMethod.POST)
 	public ResponseEntity<Object> writeComment(@RequestBody CommentEntity commentEntity){
         commentEntity=commentRepository.save(commentEntity);
         return new ResponseEntity<>(commentEntity, HttpStatus.OK);

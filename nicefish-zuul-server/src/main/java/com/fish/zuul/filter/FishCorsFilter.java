@@ -1,4 +1,4 @@
-package com.fish.user.filter;
+package com.fish.zuul.filter;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

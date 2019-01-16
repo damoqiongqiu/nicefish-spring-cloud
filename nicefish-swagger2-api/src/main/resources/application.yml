@@ -1,11 +1,13 @@
 server:
-  port: 9004
+  port: 9400
 
-# 这里为了兼容user-center里面获取配置的方式，TODO:需要改得优雅一点
+spring:
+  application:
+    name: nicefish-swagger2-api
+
 security:
   oauth2:
     resource:
-      filter-order: 3
       jwt:
         key-value: |
           -----BEGIN PUBLIC KEY-----

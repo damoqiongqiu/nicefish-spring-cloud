@@ -82,7 +82,7 @@ CREATE TABLE `auth_user` (
 
 /*Data for the table `auth_user` */
 
-insert  into `auth_user`(`id`,`email`,`mobile`,`nick_name`,`first_name`,`last_name`,`password`,`country`,`create_time`) values (38,'damoqiongqiu@126.com',NULL,NULL,NULL,NULL,'$2a$10$kLDm3FQC78y/vhbRppacxegmsDR.wT9XZqAJHfNlny3sixr/N8UqG',NULL,'2019-01-06 11:44:08'),(47,'test@gmail.com',NULL,NULL,NULL,NULL,'$2a$10$YJnGpoXwXGrDxeiMRmBr8ezteplRVvoRVZqKj/qBs5sgbB8dikdBS',NULL,'2019-01-10 11:23:50');
+insert  into `auth_user`(`id`,`email`,`mobile`,`nick_name`,`first_name`,`last_name`,`password`,`country`,`create_time`) values (38,'damoqiongqiu@126.com',NULL,'大漠穷秋',NULL,NULL,'$2a$10$kLDm3FQC78y/vhbRppacxegmsDR.wT9XZqAJHfNlny3sixr/N8UqG',NULL,'2019-01-06 11:44:08');
 
 /*Table structure for table `auth_user_role` */
 
@@ -161,7 +161,7 @@ CREATE TABLE `blog_post` (
   `ENABLE_COMMENT` int(11) NOT NULL DEFAULT '1' COMMENT '是否可评论\n            0不可\n            1可',
   `STATUS` int(11) NOT NULL DEFAULT '4' COMMENT '状态：\n            1、已删除\n            2、已归档，已归档的内容禁止评论，文章不可删除\n            3、草稿\n            4、已发布\n            5、精华-->精华文章不可删除\n            6、已推至首页\n            ',
   PRIMARY KEY (`POST_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
 
 /*Data for the table `blog_post` */
 

@@ -22,6 +22,7 @@ import java.util.List;
  * @author 大漠穷秋
  */
 @RestController
+@RequestMapping("/blog")
 public class PostController {
 	final static Logger logger = LoggerFactory.getLogger(PostController.class);
 
@@ -34,7 +35,7 @@ public class PostController {
     //TODO:每页显示的条数改为系统配置项
 	private Integer pageSize=10;
 
-	@RequestMapping(value = "/blog/post-list/{page}", method = RequestMethod.GET)
+	@RequestMapping(value = "/post-list/{page}", method = RequestMethod.GET)
 	public ResponseEntity<Object> getPostList(@PathVariable(value="page",required = false) Integer page) {
 		if(page==null||page<=0){
 			page=1;
@@ -66,16 +67,17 @@ public class PostController {
         return new ResponseEntity<>(resultMap, HttpStatus.OK);
     }
 
-	@RequestMapping(value = "/blog/post-detail/{id}",method = RequestMethod.GET)
+	@RequestMapping(value = "/post-detail/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Object> getPostDetail(@PathVariable(value = "id",required = true) Integer id){
 		return new ResponseEntity<>(postRepository.findOne(id), HttpStatus.OK);
 	}
 
 	@PreAuthorize("hasAnyRole('add_post')")
-	@RequestMapping(value = "/blog/write-post",method = RequestMethod.POST)
+	@RequestMapping(value = "/write-post",method = RequestMethod.POST)
 	public ResponseEntity<Object> writePost(@RequestBody PostEntity postEntity){
-	    //用户相关的服务都在user-center项目中实现，这里调用user-center提供的微服务，获取用户昵称等资料
-		ServiceInstance serviceInstance = loadBalancer.choose("user-center");
+	    //用户相关的服务都在user-center项目中实现，这里调用nicefish-user-center提供的微服务，获取用户昵称等资料
+		//TODO:需要改成向ZUUL调用，而不是直接调用服务
+		ServiceInstance serviceInstance = loadBalancer.choose("nicefish-user-center");
 		HashMap<String,Object> serviceResult = new RestTemplate().getForObject(
 				serviceInstance.getUri().toString() + "/users/"+postEntity.getUserId(),
 				HashMap.class);

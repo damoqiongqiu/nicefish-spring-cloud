@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author 大漠穷秋
  */
 @RestController
+@RequestMapping("/users")
 public class PermissionController {
 
     @Autowired

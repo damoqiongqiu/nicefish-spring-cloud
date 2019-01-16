@@ -21,7 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
+public class OAuthWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomUserDetailsService customDetailsService;
 

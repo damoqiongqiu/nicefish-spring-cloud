@@ -1,9 +1,9 @@
 server:
-    port: 9002
+    port: 9200
 
 spring:
     application:
-        name: user-center
+        name: nicefish-user-center
     datasource:
         driverClassName: com.mysql.jdbc.Driver
         url: "jdbc:mysql://localhost:3306/nicefish?autoreconnect=true"

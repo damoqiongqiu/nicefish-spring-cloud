@@ -1,29 +1,9 @@
 server:
-  port: 9100
+  port: 9500
 
 spring:
   application:
-    name: nicefish-oauth2-jwt
-  datasource:
-    driverClassName: com.mysql.jdbc.Driver
-    url: "jdbc:mysql://localhost:3306/nicefish?autoreconnect=true"
-    password: "root"
-    username: "root"
-    testOnBorrow: true
-    testWhileIdle: true
-    timeBetweenEvictionRunsMillis: 60000
-    minEvictableIdleTimeMillis: 30000
-    validationQuery: SELECT 1
-    max-active: 15
-    max-idle: 10
-    max-wait: 8000
-  jpa:
-    properties:
-      hibernate:
-        hbm2ddl:
-          auto: validate
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-    show-sql: true
+    name: nicefish-zuul-server
   cloud:
     consul:
       enabled: true
@@ -39,14 +19,36 @@ spring:
         tags: ${spring.application.name}
         instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
 
-mybatis:
-  type-aliases-package: com.fish.oauth.entity
+zuul:
+  sensitive-headers: Cookie, Set-Cookie
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+  routes:
+    oauth:
+      path: /oauth/**
+      serviceId: nicefish-oauth2-jwt
+      stripPrefix: false
+    users:
+      path: /users/**
+      serviceId: nicefish-user-center
+      stripPrefix: false
+    blog:
+      path: /blog/**
+      serviceId: nicefish-blog
+      stripPrefix: false
+  ratelimit:
+    enabled: true
+    repository: IN_MEMORY
+    policies:
+      api:
+        limit: 3
+        refresh-interval: 60
+        type: URL
 
-# 这里为了兼容user-center里面获取配置的方式，TODO:需要改得优雅一点
 security:
   oauth2:
     resource:
-      filter-order: 3
       jwt:
         key-value: |
           -----BEGIN PUBLIC KEY-----

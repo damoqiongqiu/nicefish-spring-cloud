@@ -7,8 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 /**
- * blog模块会依赖user-center模块中的FishJwtTokenConverter、SecurityConfig、FishCorsFilter等类，
- * 所以这里加了@ComponentScan注解，扫描blog和user两个二级模块下的Bean
+ * blog模块会依赖user-center模块中的FishJwtTokenConverter、SecurityConfig等配置项和Class，
+ * 所以这里加了@ComponentScan注解，扫描blog和user两个二级目录
  * @author 大漠穷秋
  */
 @SpringBootApplication

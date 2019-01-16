@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
  * @author 大漠穷秋
  */
 @RestController
+@RequestMapping("/users")
 public class RoleController {
 	@Autowired
 	RoleRepository roleRepository;

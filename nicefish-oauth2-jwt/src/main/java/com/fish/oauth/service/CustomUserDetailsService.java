@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * 自定义用户详情服务，目的是在用户详情里面增加自定义字段，这些字段会被存储到JWT的Token里面。
- * @see com.fish.oauth.config.OAuthSecurityConfig 里面会利用此服务来查询数据库中的用户详情。
+ * @see com.fish.oauth.config.OAuthWebSecurityConfig 里面会利用此服务来查询数据库中的用户详情。
  * @author 大漠穷秋
  */
 @Service

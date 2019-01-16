@@ -8,13 +8,19 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.fish</groupId>
-    <artifactId>nicefish-blog</artifactId>
+    <artifactId>nicefish-zuul-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>nicefish-blog</name>
-    <description>Blog应用</description>
+    <name>nicefish-zuul-server</name>
+    <description>API网关zuul的配置</description>
     <packaging>jar</packaging>
 
     <dependencies>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.3.156</version>
+        </dependency>
+
         <!-- 需要依赖user-center模块的一些配置项和Class -->
         <dependency>
             <groupId>com.fish</groupId>
@@ -23,15 +29,9 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Date Source and JPA -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zuul</artifactId>
         </dependency>
     </dependencies>
 </project>

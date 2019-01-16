@@ -20,6 +20,7 @@ import java.util.List;
  * @author 大漠穷秋
  */
 @RestController
+@RequestMapping("/users")
 public class UserController {
 	final static Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -32,12 +33,12 @@ public class UserController {
 	//TODO:每页显示的条数改为系统配置项
 	private Integer pageSize=10;
 
-	@RequestMapping(value = "/users/{id}",method = RequestMethod.GET)
+	@RequestMapping(value = "/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Object> getUserDetail(@PathVariable("id") Integer id) {
 		return new ResponseEntity<>(userRepository.findOne(id), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/users/create", method = RequestMethod.POST)
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public ResponseEntity<Object> createUser(@RequestBody UserEntity userEntity) {
 		//TODO:加参数校验
 		if(userRepository.findByEmail(userEntity.getEmail())==null){
@@ -53,7 +54,7 @@ public class UserController {
 		return new ResponseEntity<>(new AjaxResponseEntity(true,"创建成功",result), HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/users/edit/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Object> updateUser(@PathVariable("id") Integer id, @RequestBody UserEntity userEntity) {
 		//TODO:数据和业务逻辑校验，不准修改邮箱，邮箱格式必须合法
 		//TODO:数据保护，不允许编辑比自己权限高的用户
@@ -61,7 +62,7 @@ public class UserController {
 		return new ResponseEntity<>("User updated successfully", HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/users/delete/{id}", method = RequestMethod.GET)
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Object> deleteUser(@PathVariable("id") Integer id) {
 		//TODO:数据保护，不允许删除比自己权限高的用户
 		userRepository.delete(id);
@@ -80,7 +81,7 @@ public class UserController {
 	}
 
 	@PreAuthorize("hasAnyRole('view_users')")
-	@RequestMapping(value = "/users/user-table", method = RequestMethod.POST)
+	@RequestMapping(value = "/user-table", method = RequestMethod.POST)
 	public ResponseEntity<Object> getUserListByPaging(@RequestBody HashMap<String,String> params) {
 		Integer page=Integer.valueOf(params.get("page"));
 		if(page==null||page<=0){

@@ -1,9 +1,9 @@
 server:
-  port: 9003
+  port: 9300
 
 spring:
   application:
-    name: blog
+    name: nicefish-blog
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: "jdbc:mysql://localhost:3306/nicefish?autoreconnect=true"
@@ -26,9 +26,11 @@ spring:
     show-sql: true
   cloud:
     consul:
+      enabled: true
       host: 127.0.0.1
       port: 8500
       discovery:
+        enabled: true
         register: true
         hostname: localhost
         serviceName: ${spring.application.name}
