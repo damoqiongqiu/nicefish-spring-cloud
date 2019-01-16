@@ -39,7 +39,7 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 ## Maven Module 模块功能和依赖关系
 
 <p align="center">
-    <img width="150" src="./doc/structure.png">
+    <img src="./doc/structure.png">
 </p>
 
 - nicefish-spring-cloud：这是root项目，通用的依赖都定义在这个项目的pom.xml中，子Module会自动继承这里的依赖关系。
@@ -89,7 +89,7 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 
 ## 关联 QQ 群
 
-<img width="320" src="./doc/nicefish-springcloud.png">
+<img width="320" src="./doc/nicefish-springcloud.jpg">
 
 ## License
 
