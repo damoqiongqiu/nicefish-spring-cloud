@@ -1,0 +1,119 @@
+spring:
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        register: true
+        hostname: localhost
+        serviceName: ${spring.application.name}
+        healthCheckPath: /health
+        healthCheckInterval: 15s
+        tags: ${spring.application.name}
+        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: "jdbc:mysql://localhost:3306/nicefish?autoreconnect=true"
+    password: "root"
+    username: "root"
+    testOnBorrow: true
+    testWhileIdle: true
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: SELECT 1
+    max-active: 15
+    max-idle: 10
+    max-wait: 8000
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: validate
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+  security:
+    oauth2:
+      resource:
+        jwt:
+          key-value: |
+            -----BEGIN PUBLIC KEY-----
+            MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvNbZCFkfl0OkLu0Q+yhY
+            qlBZ+mrCiOEuPqDyrxJ552Zy+LJFmrGfO+6SqbwreAORy0YjkFFFexNomRv+XJQN
+            A83DOKmkiyp41fazVwupzQo/9XThaY8NJMye0CAfQ3Bgr5zxStUbT8zCbdzVxsFv
+            /+JSRU91HFSkWzntsuY09jHfErR97HCvZHDnaCRp8QEVz96XCh5CRvLb/+kI5Hc9
+            WqOrmmlsU4u13x5ykGBIeOMXhR58Et+PFV7a/JcUyZwujM9luYBHJxfDktUJQw5o
+            dsa+rPNf3tTJi7JZV8RAsS1TfXYu6mZwGG76Pn+1vDl7Uo36rw0OYXoW+ITbx3VL
+            aQIDAQAB
+            -----END PUBLIC KEY-----
+
+config:
+  oauth2:
+    clientId: fish
+    clientSecret: fish
+    accessTokenValiditySeconds: 3600
+    refreshTokenValiditySeconds: 18000
+    privateKey: |
+      -----BEGIN RSA PRIVATE KEY-----
+      MIIEpAIBAAKCAQEAvNbZCFkfl0OkLu0Q+yhYqlBZ+mrCiOEuPqDyrxJ552Zy+LJF
+      mrGfO+6SqbwreAORy0YjkFFFexNomRv+XJQNA83DOKmkiyp41fazVwupzQo/9XTh
+      aY8NJMye0CAfQ3Bgr5zxStUbT8zCbdzVxsFv/+JSRU91HFSkWzntsuY09jHfErR9
+      7HCvZHDnaCRp8QEVz96XCh5CRvLb/+kI5Hc9WqOrmmlsU4u13x5ykGBIeOMXhR58
+      Et+PFV7a/JcUyZwujM9luYBHJxfDktUJQw5odsa+rPNf3tTJi7JZV8RAsS1TfXYu
+      6mZwGG76Pn+1vDl7Uo36rw0OYXoW+ITbx3VLaQIDAQABAoIBADFQvm8Sr1BWhtsG
+      aCffGoCn6Uefd9w9SlFqwNX9sj4/IAlYrRrABkClhkGzdXqrG/kFASagQs/oeql5
+      iQzuURPMOY5jpyf82H+wJJe34Qk+AwP8GR3zENCqa1MZAHEhOO7DwrPzQWWuqJv+
+      TwnP3IrrtOaK4J+cbyuvziapPe2JF6L9tHwlbhMlkpgbssnEl1L1Azqs9YC1Ij6t
+      0vBIRivUnkFS+pCVQ9NrP+oRRmTw0LL5YPwXc6tX3v6n+7HHDXjXR/HpIx6N1C4u
+      m2sfCvWCPEl4k0YxBW77800EFBomh4lNofHBUKg/OUDYRO8eN7lt5LRI4a7Istav
+      4rTjaC0CgYEA599s1+AvL6OkLGbmwgpVUeVEo4AwxdW1/TfbwH0v/y3g4JSCOH+G
+      7i2apdx0Sqwn6aQ8HWM8XV4eN80j0MjmtY1uGIPqvf6iO0TSKQ5JFXZAeb/L3379
+      7ZF0De+idoGi9ExgJhx+zrJjNzqjUm2TFf46rUGBa3bXeNejiMVBRwMCgYEA0H0b
+      DYMYd4higVU9EvX7XlS0sVsbghJG89CPzxSW2wi3VY/DooVy4Irz8m+q1DqugCI3
+      0s9mpjWAeLpJks2eC5WDe6Zg4mo2swneDlrBnRBkQjVfMUv8cECkqQ6a1xc5k0qt
+      Equpsx1xfwRBxivi22FfykL/Rj53k0NvuuSOMiMCgYEAm0jj6cb3kt3yqtHXJIgr
+      D4eNajoFb9hp4sUv5D9yj2C4Q27xrsipIoVkFkQHlaKpsC0PHVdCK/1GG3TE0aRZ
+      7ahj3QMriEYpe6vhWyF4DGl/UIoEDQ9NG3bX1CVyFg9HhHhJw/w9aEvLakdY7XD4
+      mjgCL9m4xLF4KDOyD3ya9OUCgYB0NrhEsOWLg6987jmL/ydt7oOGNQXBXFTGhWQU
+      ByML1vDytZ9UUVS2i13trocno8ovTGOXk9phHYOOSDDIrurBBEd1PknVC2WQKRjp
+      IXe5CDEKott8DCIbpDzkq2puKNkEHGUa+isu12OzbHkJcN8UcFPH186ZpipbIQT/
+      xXTpxwKBgQDZzfXRGqAmuukz5MjcbvN77u6eTkXASdSKC3nNyWMmTJ1Wn8DU1XcA
+      AiWKiy73TUCfwJx5pdg0/tthnf0ztKeqrbxeS/uU1xkov/YfgOQoJtdJpIVgvYgq
+      zzX/lQCVBl3kod4zAsvprbp5wc6cE0YiPVl8JRNKqu0YoqPxd35nHg==
+      -----END RSA PRIVATE KEY-----
+    publicKey: |
+      -----BEGIN PUBLIC KEY-----
+      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvNbZCFkfl0OkLu0Q+yhY
+      qlBZ+mrCiOEuPqDyrxJ552Zy+LJFmrGfO+6SqbwreAORy0YjkFFFexNomRv+XJQN
+      A83DOKmkiyp41fazVwupzQo/9XThaY8NJMye0CAfQ3Bgr5zxStUbT8zCbdzVxsFv
+      /+JSRU91HFSkWzntsuY09jHfErR97HCvZHDnaCRp8QEVz96XCh5CRvLb/+kI5Hc9
+      WqOrmmlsU4u13x5ykGBIeOMXhR58Et+PFV7a/JcUyZwujM9luYBHJxfDktUJQw5o
+      dsa+rPNf3tTJi7JZV8RAsS1TfXYu6mZwGG76Pn+1vDl7Uo36rw0OYXoW+ITbx3VL
+      aQIDAQAB
+      -----END PUBLIC KEY-----
+
+zuul:
+  sensitive-headers: Cookie, Set-Cookie
+  host:
+    connect-timeout-millis: 60000
+    socket-timeout-millis: 60000
+  routes:
+    oauth:
+      path: /oauth/**
+      serviceId: nicefish-oauth2-jwt
+      stripPrefix: false
+    users:
+      path: /users/**
+      serviceId: nicefish-user-center
+      stripPrefix: false
+    blog:
+      path: /blog/**
+      serviceId: nicefish-blog
+      stripPrefix: false
+  ratelimit:
+    enabled: true
+    repository: IN_MEMORY
+    policies:
+      api:
+        limit: 3
+        refresh-interval: 60
+        type: URL
