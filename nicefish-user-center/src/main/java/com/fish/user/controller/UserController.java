@@ -4,8 +4,7 @@ import com.fish.user.entity.RoleRepository;
 import com.fish.user.entity.UserEntity;
 import com.fish.user.entity.UserRepository;
 import com.fish.user.util.AjaxResponseEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +18,10 @@ import java.util.List;
 /**
  * @author 大漠穷秋
  */
+@Slf4j
 @RestController
 @RequestMapping("/users")
 public class UserController {
-	final static Logger logger = LoggerFactory.getLogger(UserController.class);
-
 	@Autowired
 	UserRepository userRepository;
 
@@ -50,7 +48,7 @@ public class UserController {
 		userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 		UserEntity result=userRepository.save(userEntity);
 		result.setPassword("");
-		logger.debug(result.getId().toString());
+		log.debug(result.getId().toString());
 		return new ResponseEntity<>(new AjaxResponseEntity(true,"创建成功",result), HttpStatus.OK);
 	}
 
