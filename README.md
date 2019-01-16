@@ -8,16 +8,6 @@
 NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular 在浏览器、移动端、Electron 环境中的用法，同时提供了一个基于 SpringCloud 的服务端。
 </div>
 
-## 系列项目
-
-* NiceFish：美人鱼，这是一个微型 Blog 系统，前端基于 Angular 7.0 + PrimeNG 7.0.3。http://git.oschina.net/mumu-osc/NiceFish/
-
-* nicefish-ionic：这是一个移动端的 demo，基于 ionic，此项目已支持 PWA。http://git.oschina.net/mumu-osc/nicefish-ionic
-
-* NiceBlogElectron：https://github.com/damoqiongqiu/NiceBlogElectron ,这是一个基于 Electron 的桌面端项目，把 NiceFish 用 Electron 打包成了一个桌面端运行的程序。这是由 ZTE 中兴通讯的前端道友提供的，我 fork 了一个，有几个 node 模块的版本号老要改，如果您正在研究如何利用 Electron 开发桌面端应用，请参考这个项目。
-
-* nicefish-spring-cloud: https://gitee.com/mumu-osc/nicefish-spring-cloud ， 这是NiceFish的服务端代码，基于SpringCloud。已经完成了一些基本的功能，如 SpringSecurity+OAuth2+JWT 实现SSO，文章、用户、评论等的分页查询等。如果你需要与这个后端代码进行对接，请检出本项目的 for-spring-cloud 分支。
-
 ## NiceFish-Spring-Cloud
 
 本项目是NiceFish的服务端代码，已经完成的功能有：
@@ -32,9 +22,10 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 用到的主要模块：
 - spring-cloud-starter-consul-discovery
 - spring-cloud-starter-zuul
-- spring-cloud-oauth2（已经内置依赖了spring-cloud-starter-security、spring-security-oauth2、spring-security-jwt）
+- spring-cloud-oauth2
 - spring-boot-starter-data-jpa
 - mysql-connector-java
+- springfox-swagger2
 
 ## Maven Module 模块功能和依赖关系
 
@@ -52,13 +43,15 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 
 ## 使用方法
 
-- 安装配置好Consul（默认HTTP端口是8500），以dev的方式启动agent（命令行执行consul agent -dev），请仔细参照官方文档：https://www.consul.io/
-- 克隆项目到你的本地：git clone https://gitee.com/mumu-osc/nicefish-spring-cloud.git
-- 在你本地的MySQL里面建一个库，名为nicefish，然后执行 /doc/nicefish.sql 建表
-- 用IDEA导入项目（编译工具为Maven）
-- 启动所有模块（有顺序）：NiceFishOAuthApplication.java、NiceFishUserCenterApplication.java、NiceFishBlogApplication.java、NiceFishZuulServerApplication.java
-- 使用Postman或者NiceFish的前端项目来测试后端接口（Zuul网关默认起在9500端口、OAuth服务默认起在9100端口，用户中心模块默认起在9200端口，blog相关的模块默认起在9300端口，Swagger2文档服务默认起在9400端口，内置了一个测试账号damoqiongqiu@126.com，密码12345678，密码对应的MD5是25d55ad283aa400af464c76d713c07ad）
-- 前端代码在这里：https://gitee.com/mumu-osc/NiceFish ，NiceFish与本项目对接的代码位于for-spring-cloud分支上,里面有完整的使用说明，请仔细阅读Readme文档。
+- 安装配置好JDK，需要Java 1.8以上版本。
+- 安装配置好maven，或者使用IDEA内置的maven。
+- 安装配置好Consul（默认HTTP端口是8500），以dev的方式启动agent（命令行执行consul agent -dev），请仔细参照官方文档：https://www.consul.io/ 。
+- 克隆项目到你的本地：git clone https://gitee.com/mumu-osc/nicefish-spring-cloud.git 。
+- 在你本地的MySQL里面建一个库，名为nicefish，然后执行 /doc/nicefish.sql 建表。
+- 用IDEA导入根项目nicefish-spring-cloud的pom.xml 。
+- 启动所有子模块（有顺序）：NiceFishOAuthApplication.java、NiceFishUserCenterApplication.java、NiceFishBlogApplication.java、NiceFishZuulServerApplication.java 。
+- 使用Postman或者NiceFish的前端项目来测试Restful接口（Zuul网关默认起在9500端口、OAuth服务默认起在9100端口，用户中心模块默认起在9200端口，blog相关的模块默认起在9300端口，Swagger2文档服务默认起在9400端口，内置了一个测试账号damoqiongqiu@126.com，密码12345678，密码对应的MD5是25d55ad283aa400af464c76d713c07ad） 。
+- 前端代码：https://gitee.com/mumu-osc/NiceFish ，NiceFish与本项目对接的代码位于for-spring-cloud分支上,里面有完整的使用说明，请仔细阅读Readme文档。
 
 ## 特别注意
 
@@ -87,9 +80,21 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 - 引入Redis缓存
 - 引入Docker进行打包和部署
 
+## 系列项目
+
+* NiceFish：美人鱼，这是一个微型 Blog 系统，前端基于 Angular 7.0 + PrimeNG 7.0.3。http://git.oschina.net/mumu-osc/NiceFish/
+
+* nicefish-ionic：这是一个移动端的 demo，基于 ionic，此项目已支持 PWA。http://git.oschina.net/mumu-osc/nicefish-ionic
+
+* NiceBlogElectron：https://github.com/damoqiongqiu/NiceBlogElectron ,这是一个基于 Electron 的桌面端项目，把 NiceFish 用 Electron 打包成了一个桌面端运行的程序。这是由 ZTE 中兴通讯的前端道友提供的，我 fork 了一个，有几个 node 模块的版本号老要改，如果您正在研究如何利用 Electron 开发桌面端应用，请参考这个项目。
+
+* nicefish-spring-cloud: https://gitee.com/mumu-osc/nicefish-spring-cloud ， 这是NiceFish的服务端代码，基于SpringCloud。已经完成了一些基本的功能，如 SpringSecurity+OAuth2+JWT 实现SSO，文章、用户、评论等的分页查询等。如果你需要与这个后端代码进行对接，请检出本项目的 for-spring-cloud 分支。
+
 ## 关联 QQ 群
 
 <img width="320" src="./doc/nicefish-springcloud.jpg">
+
+**特别备注：此群仅限本项目issue和功能交流，不提供一对一咨询，不回答新手问题，谢谢您的理解。**
 
 ## License
 
