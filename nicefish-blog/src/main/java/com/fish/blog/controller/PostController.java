@@ -73,8 +73,7 @@ public class PostController {
 	@PreAuthorize("hasAnyRole('add_post')")
 	@RequestMapping(value = "/write-post",method = RequestMethod.POST)
 	public ResponseEntity<Object> writePost(@RequestBody PostEntity postEntity){
-	    //用户相关的服务都在user-center项目中实现，这里调用nicefish-user-center提供的微服务，获取用户昵称等资料
-		//TODO:需要改成向ZUUL调用，而不是直接调用服务
+	    //用户相关的服务都在nicefish-user-center项目中实现，这里调用nicefish-user-center提供的微服务，获取用户昵称等资料
 		ServiceInstance serviceInstance = loadBalancer.choose("nicefish-user-center");
 		HashMap<String,Object> serviceResult = new RestTemplate().getForObject(
 				serviceInstance.getUri().toString() + "/users/"+postEntity.getUserId(),
