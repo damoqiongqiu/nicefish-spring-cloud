@@ -69,6 +69,26 @@ public class PostController {
 		return new ResponseEntity<>(postEntity, HttpStatus.OK);
 	}
 
+	@PreAuthorize("hasAnyRole('edit_post')")
+	@RequestMapping(value = "/edit-post",method = RequestMethod.POST)
+	public ResponseEntity<Object> editPost(@RequestBody PostEntity postEntity){
+		//用户相关的服务都在nicefish-user-center项目中实现，这里调用nicefish-user-center提供的微服务，获取用户昵称等资料
+		ServiceInstance serviceInstance = loadBalancer.choose("nicefish-user-center");
+		HashMap<String,Object> serviceResult = new RestTemplate().getForObject(
+				serviceInstance.getUri().toString() + "/users/"+postEntity.getUserId(),
+				HashMap.class);
+
+		log.debug(serviceResult.toString());
+		//TODO:如果没有查到用户资料，报错返回
+
+		postEntity.setUserId((int)serviceResult.get("id"));
+		postEntity.setEmail((String)serviceResult.get("email"));
+		postEntity.setNickName(serviceResult.get("nickName")==null?"":serviceResult.get("nickName").toString());
+		//TODO:返回的数据里面没有id，事务问题？
+		postEntity=postRepository.save(postEntity);
+		return new ResponseEntity<>(postEntity, HttpStatus.OK);
+	}
+
 	@RequestMapping(value = "/manage/post-table", method = RequestMethod.POST)
 	public ResponseEntity<Object> getPostListByUserId(@RequestBody HashMap<String,String> params) {
 		Integer page=Integer.valueOf(params.get("page"));
