@@ -29,7 +29,7 @@ CREATE TABLE `auth_permission` (
 
 /*Data for the table `auth_permission` */
 
-insert  into `auth_permission`(`id`,`permission_name`) values (1,'view_permission'),(2,'create_role'),(3,'edit_role'),(4,'view_role'),(5,'delete_role'),(6,'assign_permissions_to_role'),(7,'view_permissions_by_role'),(8,'create_users'),(9,'edit_users'),(10,'view_users'),(11,'delete_users'),(12,'assign_users_to_role'),(13,'view_users_by_role'),(14,'add_comment'),(15,'del_comment'),(16,'add_post'),(17,'del_post');
+insert  into `auth_permission`(`id`,`permission_name`) values (1,'view_permission'),(2,'create_role'),(3,'edit_role'),(4,'view_role'),(5,'del_role'),(6,'assign_permissions_to_role'),(7,'view_permissions_by_role'),(8,'create_users'),(9,'edit_users'),(10,'view_users'),(11,'delete_users'),(12,'assign_users_to_role'),(13,'view_users_by_role'),(14,'add_comment'),(15,'del_comment'),(16,'add_post'),(17,'del_post'),(18,'edit_post');
 
 /*Table structure for table `auth_role` */
 
@@ -57,11 +57,11 @@ CREATE TABLE `auth_role_permission` (
   PRIMARY KEY (`id`),
   KEY `role_id` (`role_id`),
   KEY `permission_id` (`permission_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 
 /*Data for the table `auth_role_permission` */
 
-insert  into `auth_role_permission`(`id`,`role_id`,`permission_id`) values (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,1,5),(6,1,6),(7,1,7),(8,1,8),(9,1,9),(10,1,10),(11,1,11),(12,1,12),(13,1,13),(14,1,14),(15,1,15),(16,1,16),(17,1,17);
+insert  into `auth_role_permission`(`id`,`role_id`,`permission_id`) values (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,1,5),(6,1,6),(7,1,7),(8,1,8),(9,1,9),(10,1,10),(11,1,11),(12,1,12),(13,1,13),(14,1,14),(15,1,15),(16,1,16),(17,1,17),(18,1,18);
 
 /*Table structure for table `auth_user` */
 
@@ -122,7 +122,7 @@ CREATE TABLE `blog_comment` (
 
 /*Data for the table `blog_comment` */
 
-insert  into `blog_comment`(`COMMENT_ID`,`POST_ID`,`CONTENT`,`COMMENT_TIME`,`COMMENT_IP`,`P_ID`,`USER_ID`,`USER_NAME`,`NICK_NAME`,`EMAIL`,`STATUS`) values (1,1,'代购肯定是国家重点整治的，特别是国外代购。因为它基本上于走私是同等性质。只是造了个新词，代购！','2019-01-03 18:33:35',NULL,'-1',38,NULL,NULL,NULL,1),(2,1,'想问一下下，那些明星国外都是几百万的买东西，回国的时候。会查吗？要交税吗？','2019-01-03 18:33:35',NULL,'-1',38,NULL,NULL,NULL,1),(3,1,'问题 代购你就代购吧 这点无可厚非 之前没有相关法律 这是法律和定制法律者的疏忽和责任，也是社会的进步过程 最不能理解的还是代购真假混卖','2019-01-03 18:33:35',NULL,'-1',38,NULL,NULL,NULL,1),(4,1,'代购和自购怎么区分 有时候个人出去一次恨不得把一年货买了带回来，这个怎么鉴别','2019-01-03 18:33:35',NULL,'-1',38,NULL,NULL,NULL,1),(5,1,'我朋友圈的代购都活着呢[捂脸]','2019-01-03 18:33:35',NULL,'-1',38,NULL,NULL,NULL,1),(6,1,'我觉得微商才最可怕','2019-01-03 18:33:35',NULL,'-1',38,NULL,NULL,NULL,1),(13,1,'testtest','2019-01-13 21:17:57',NULL,NULL,38,NULL,NULL,NULL,NULL),(14,2,'testtest','2019-01-14 12:22:03',NULL,NULL,38,NULL,NULL,NULL,NULL);
+insert  into `blog_comment`(`COMMENT_ID`,`POST_ID`,`CONTENT`,`COMMENT_TIME`,`COMMENT_IP`,`P_ID`,`USER_ID`,`USER_NAME`,`NICK_NAME`,`EMAIL`,`STATUS`) values (1,1,'代购肯定是国家重点整治的，特别是国外代购。因为它基本上于走私是同等性质。只是造了个新词，代购！','2019-01-03 18:33:35',NULL,'-1',38,NULL,NULL,NULL,1),(2,1,'想问一下下，那些明星国外都是几百万的买东西，回国的时候。会查吗？要交税吗？','2019-01-03 18:33:35',NULL,'-1',38,NULL,NULL,NULL,1),(3,1,'问题 代购你就代购吧 这点无可厚非 之前没有相关法律 这是法律和定制法律者的疏忽和责任，也是社会的进步过程 最不能理解的还是代购真假混卖','2019-01-03 18:33:35',NULL,'-1',38,NULL,NULL,NULL,1),(4,1,'代购和自购怎么区分 有时候个人出去一次恨不得把一年货买了带回来，这个怎么鉴别','2019-01-03 18:33:35',NULL,'-1',38,NULL,NULL,NULL,1),(5,1,'我朋友圈的代购都活着呢[捂脸]','2019-01-03 18:33:35',NULL,'-1',38,NULL,NULL,NULL,1),(6,1,'我觉得微商才最可怕','2019-01-03 18:33:35',NULL,'-1',38,NULL,NULL,NULL,1);
 
 /*Table structure for table `blog_params` */
 
@@ -161,7 +161,7 @@ CREATE TABLE `blog_post` (
   `ENABLE_COMMENT` int(11) NOT NULL DEFAULT '1' COMMENT '是否可评论\n            0不可\n            1可',
   `STATUS` int(11) NOT NULL DEFAULT '4' COMMENT '状态：\n            1、已删除\n            2、已归档，已归档的内容禁止评论，文章不可删除\n            3、草稿\n            4、已发布\n            5、精华-->精华文章不可删除\n            6、已推至首页\n            ',
   PRIMARY KEY (`POST_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 /*Data for the table `blog_post` */
 
