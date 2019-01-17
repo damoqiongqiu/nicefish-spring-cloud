@@ -2,6 +2,7 @@ package com.fish.blog.controller;
 
 import com.fish.blog.entity.PostEntity;
 import com.fish.blog.entity.PostRepository;
+import com.fish.user.util.AjaxResponseEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
@@ -43,28 +44,6 @@ public class PostController {
 		return new ResponseEntity<>(postEntities, HttpStatus.OK);
 	}
 
-    @RequestMapping(value = "/manage/post-table", method = RequestMethod.POST)
-    public ResponseEntity<Object> getPostListByUserId(@RequestBody HashMap<String,String> params) {
-	    Integer page=Integer.valueOf(params.get("page"));
-        Integer userId=Integer.valueOf(params.get("userId"));
-        if(page==null||page<=0){
-            page=1;
-        }
-        page=page-1;
-
-        List<PostEntity> postEntities=postRepository.findByUserIdAndPageing(userId,page*pageSize,pageSize);
-        Long totalElements=postRepository.countByUserId(userId);
-        Integer totalPages=(int)(totalElements/pageSize+1);
-
-        HashMap<String,Object> resultMap=new HashMap<String,Object>();
-        resultMap.put("totalElements",totalElements);
-        resultMap.put("totalPages",totalPages);
-        resultMap.put("size",pageSize);
-        resultMap.put("content",postEntities);
-
-        return new ResponseEntity<>(resultMap, HttpStatus.OK);
-    }
-
 	@RequestMapping(value = "/post-detail/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Object> getPostDetail(@PathVariable(value = "id",required = true) Integer id){
 		return new ResponseEntity<>(postRepository.findOne(id), HttpStatus.OK);
@@ -88,5 +67,34 @@ public class PostController {
 		//TODO:返回的数据里面没有id，事务问题？
 		postEntity=postRepository.save(postEntity);
 		return new ResponseEntity<>(postEntity, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/manage/post-table", method = RequestMethod.POST)
+	public ResponseEntity<Object> getPostListByUserId(@RequestBody HashMap<String,String> params) {
+		Integer page=Integer.valueOf(params.get("page"));
+		Integer userId=Integer.valueOf(params.get("userId"));
+		if(page==null||page<=0){
+			page=1;
+		}
+		page=page-1;
+
+		List<PostEntity> postEntities=postRepository.findByUserIdAndPageing(userId,page*pageSize,pageSize);
+		Long totalElements=postRepository.countByUserId(userId);
+		Integer totalPages=(int)(totalElements/pageSize+1);
+
+		HashMap<String,Object> resultMap=new HashMap<String,Object>();
+		resultMap.put("totalElements",totalElements);
+		resultMap.put("totalPages",totalPages);
+		resultMap.put("size",pageSize);
+		resultMap.put("content",postEntities);
+
+		return new ResponseEntity<>(resultMap, HttpStatus.OK);
+	}
+
+	@PreAuthorize("hasAnyRole('del_post')")
+	@RequestMapping(value = "/manage/del-post/{postId}",method = RequestMethod.DELETE)
+	public ResponseEntity<Object> delPostById(@PathVariable(value="postId",required = true) Integer postId){
+		postRepository.delete(postId);
+		return new ResponseEntity<>(new AjaxResponseEntity(true,"删除成功"),HttpStatus.OK);
 	}
 }

@@ -2,12 +2,14 @@ package com.fish.blog.controller;
 
 import com.fish.blog.entity.CommentEntity;
 import com.fish.blog.entity.CommentRepository;
+import com.fish.user.util.AjaxResponseEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -63,5 +65,12 @@ public class CommentController {
 		resultMap.put("content",commentEntities);
 
 		return new ResponseEntity<>(resultMap, HttpStatus.OK);
+	}
+
+	@PreAuthorize("hasAnyRole('del_comment')")
+	@RequestMapping(value = "/manage/del-comment/{commentId}",method = RequestMethod.DELETE)
+	public ResponseEntity<Object> delPostById(@PathVariable(value="commentId",required = true) Integer commentId){
+		commentRepository.delete(commentId);
+		return new ResponseEntity<>(new AjaxResponseEntity(true,"删除成功"),HttpStatus.OK);
 	}
 }
