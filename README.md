@@ -35,6 +35,13 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
     <img src="./doc/structure.png">
 </p>
 
+
+Maven 模块之间的依赖关系
+
+<p align="center">
+    <img src="./doc/maven-module-dependency.png">
+</p>
+
 - nicefish-spring-cloud：这是root项目，通用的依赖都定义在这个项目的pom.xml中，子Module会自动继承这里的依赖关系。
 - nicefish-zuul-server：这是所有外部调用的总入口，Zuul会自动到Consul上获取所有RestAPI，依赖nicefish-user-center模块中的配置和UserEntity等。
 - nicefish-user-center：这是用户中心模块，它是独立的不依赖其它子模块。
