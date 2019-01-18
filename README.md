@@ -15,6 +15,7 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 - 用Consul进行服务注册和发现
 - 用Zuul对外暴露统一的REST服务入口
 - 用SpringSecurity+OAuth2+JWT实现SSO
+- 用Druid监控MySQL
 - 文章管理（列表分页查询、新增文章）
 - 评论管理（列表分页查询）
 - 用户管理（注册、登录、SSO）
@@ -26,6 +27,7 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 - spring-boot-starter-data-jpa
 - mysql-connector-java
 - springfox-swagger2
+- druid-spring-boot-starter
 
 ## Maven Module 模块功能和依赖关系
 
@@ -39,7 +41,7 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 - nicefish-blog：这里实现blog相关的功能，如文章和评论等，依赖nicefish-user-center模块中的配置和UserEntity等。
 - nicefish-oauth2-jwt：这里实现OAuth和JWT相关的功能，依赖nicefish-user-center模块中的UserEntity和Repository等。
 - nicefish-swagger2-api：这里是所有API文档的总入口，依赖nicefish-user-center、nicefish-blog、nicefish-oauth2-jwt模块，解析并生成API文档，访问地址是 http://localhost:9004/swagger-ui.html#/
-
+- Druid 监控访问路径：http://127.0.0.1:9500/druid/index.html ，默认用户名和密码admin/123456
 
 ## 使用方法
 
@@ -47,6 +49,7 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 - 安装配置好maven，或者使用IDEA内置的maven。
 - 安装配置好Consul（默认HTTP端口是8500），以dev的方式启动agent（命令行执行consul agent -dev），请仔细参照官方文档：https://www.consul.io/ 。
 - 克隆项目到你的本地：git clone https://gitee.com/mumu-osc/nicefish-spring-cloud.git 。
+- 安装配置好MySQL或者MariaDB，MySQL需要5.x以上，MariaDB需要10.x以上。
 - 在你本地的MySQL里面建一个库，名为nicefish，然后执行 /doc/nicefish.sql 建表。
 - 用IDEA导入根项目nicefish-spring-cloud的pom.xml 。
 - 启动所有子模块（有顺序）：NiceFishOAuthApplication.java、NiceFishUserCenterApplication.java、NiceFishBlogApplication.java、NiceFishZuulServerApplication.java 。
@@ -55,8 +58,8 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 
 ## 特别注意
 
-- ** 此项目在 SpringBoot 1.5.9.RELEASE 和 SpringCloud Edgware.RELEASE 测试通过，其它所有版本都未经测试。（SpringBoot和SpringCloud之间存在版本对应关系，版本升级可能需要修改非常多的琐碎细节。如果您需要升级版本，请仔细查阅Spring官方的文档，以免浪费大量时间。）**
-- ** 项目本身的代码是独立的，没有与任何前端技术绑定，因此您可以使用任意前端技术接入。 **
+- **此项目在 SpringBoot 1.5.9.RELEASE 和 SpringCloud Edgware.RELEASE 测试通过，其它所有版本都未经测试。（SpringBoot和SpringCloud之间存在版本对应关系，版本升级可能需要修改非常多的琐碎细节。如果您需要升级版本，请仔细查阅Spring官方的文档，以免浪费大量时间。）**
+- **项目本身的代码是独立的，没有与任何前端技术绑定，因此您可以使用任意前端技术接入。**
 
 ## 效果截图
 
@@ -93,8 +96,6 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 ## 关联 QQ 群
 
 <img width="320" src="./doc/nicefish-springcloud.jpg">
-
-**特别备注：此群仅限本项目issue和功能交流，不提供一对一咨询，不回答新手问题，谢谢您的理解。**
 
 ## License
 
