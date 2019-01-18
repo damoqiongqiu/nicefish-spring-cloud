@@ -80,6 +80,8 @@ Maven 模块之间的依赖关系
 
 <img width="80%" src="./doc/5.png">
 
+<img width="80%" src="./doc/7.png">
+
 <img width="80%" src="./doc/6.png">
 
 ## TODO
