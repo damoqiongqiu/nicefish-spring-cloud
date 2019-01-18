@@ -136,6 +136,7 @@ zuul:
       path: /blog/**
       serviceId: nicefish-blog
       stripPrefix: false
+    ignored-patterns: /**/hs,/**/health
   ratelimit:
     enabled: true
     repository: IN_MEMORY
@@ -144,3 +145,8 @@ zuul:
         limit: 3
         refresh-interval: 60
         type: URL
+
+turbine:
+  app-config: nicefish-oauth2-jwt,nicefish-user-center,nicefish-blog
+  cluster-name-expression: "default"
+  combine-host-port: true

@@ -10,12 +10,14 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 
 ## NiceFish-Spring-Cloud
 
-本项目是NiceFish的服务端代码，已经完成的功能有：
+本项目是NiceFish的服务端代码，已经实现的技术特性和业务功能有：
 
 - 用Consul进行服务注册和发现
 - 用Zuul对外暴露统一的REST服务入口
+- 用Hystrix监控微服务的调用
 - 用SpringSecurity+OAuth2+JWT实现SSO
 - 用Druid监控MySQL
+- 集成lombo，用注解的方式调用日志服务
 - 文章管理（列表分页查询、新增文章）
 - 评论管理（列表分页查询）
 - 用户管理（注册、登录、SSO）
@@ -23,11 +25,14 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 用到的主要模块：
 - spring-cloud-starter-consul-discovery
 - spring-cloud-starter-zuul
+- spring-cloud-starter-netflix-hystrix-dashboard
 - spring-cloud-oauth2
 - spring-boot-starter-data-jpa
 - mysql-connector-java
 - springfox-swagger2
 - druid-spring-boot-starter
+- lombok
+- gson
 
 ## Maven Module 模块功能和依赖关系
 
@@ -43,7 +48,7 @@ Maven 模块之间的依赖关系
 </p>
 
 - nicefish-spring-cloud：这是root项目，通用的依赖都定义在这个项目的pom.xml中，子Module会自动继承这里的依赖关系。
-- nicefish-zuul-server：这是所有外部调用的总入口，Zuul会自动到Consul上获取所有RestAPI，依赖nicefish-user-center模块中的配置和UserEntity等。
+- nicefish-zuul-server：这是所有外部调用的总入口，Zuul会自动到Consul上获取所有RestAPI，依赖nicefish-user-center模块中的配置和UserEntity等。Zuul内部已经使用了Ribbon和Hystrix，因此不需要单独在pom.xml中引入这两个模块，直接配置即可，默认访问路径是：http://localhost:9500/hystrix
 - nicefish-user-center：这是用户中心模块，它是独立的不依赖其它子模块。
 - nicefish-blog：这里实现blog相关的功能，如文章和评论等，依赖nicefish-user-center模块中的配置和UserEntity等。
 - nicefish-oauth2-jwt：这里实现OAuth和JWT相关的功能，依赖nicefish-user-center模块中的UserEntity和Repository等。
