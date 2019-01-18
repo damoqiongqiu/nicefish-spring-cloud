@@ -89,6 +89,8 @@ Maven 模块之间的依赖关系
 
 <img width="80%" src="./doc/6.png">
 
+<img width="80%" src="./doc/8.png">
+
 ## TODO
 
 近期已经列入计划的修改：
