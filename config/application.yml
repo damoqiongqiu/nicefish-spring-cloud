@@ -147,6 +147,6 @@ zuul:
         type: URL
 
 turbine:
-  app-config: nicefish-oauth2-jwt,nicefish-user-center,nicefish-blog
-  cluster-name-expression: "default"
-  combine-host-port: true
+  aggregator:
+    clusterConfig: nicefish-zuul-server
+  appConfig: nicefish-zuul-server
