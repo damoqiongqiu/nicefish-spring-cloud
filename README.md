@@ -14,7 +14,7 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范 Angular �
 
 - 用Consul进行服务注册和发现
 - 用Zuul对外暴露统一的REST服务入口
-- 用Hystrix监控微服务的调用
+- 用HystrixDashboard监控微服务的调用，用Turbine整合数据图表
 - 用SpringSecurity+OAuth2+JWT实现SSO
 - 用Druid监控MySQL
 - 集成lombo，用注解的方式调用日志服务
