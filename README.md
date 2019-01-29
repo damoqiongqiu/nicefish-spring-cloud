@@ -17,7 +17,7 @@ NiceFish（美人鱼） 是一个系列项目，目标是全面示范前后端�
 - 用HystrixDashboard监控微服务的调用，用Turbine整合数据图表
 - 用SpringSecurity+OAuth2+JWT实现SSO
 - 用Druid监控MySQL
-- 集成lombo，用注解的方式调用日志服务
+- 集成lombok，用注解的方式调用日志服务
 - 文章管理（列表分页查询、新增文章）
 - 评论管理（列表分页查询）
 - 用户管理（注册、登录、SSO）
