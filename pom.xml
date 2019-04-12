@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.fish</groupId>
 	<artifactId>nicefish-spring-cloud</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>nicefish-spring-cloud</name>
 	<description>NiceFish的服务端代码。</description>
-    <packaging>pom</packaging>
+	<packaging>pom</packaging>
 
 	<modules>
 		<module>nicefish-oauth2-jwt</module>
 		<module>nicefish-user-center</module>
 		<module>nicefish-blog</module>
-        <module>nicefish-swagger2-api</module>
-        <module>nicefish-zuul-server</module>
+		<module>nicefish-swagger2-api</module>
+		<module>nicefish-zuul-server</module>
 	</modules>
 
 	<parent>
@@ -33,7 +33,11 @@
 	</properties>
 
 	<dependencies>
-		<!-- Date Source and JPA -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -49,11 +53,11 @@
 			<version>1.1.10</version>
 		</dependency>
 
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>1.3.156</version>
-        </dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.3.156</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -77,11 +81,11 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-		<!-- Consul 相关的配置 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-consul-discovery</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -92,6 +96,7 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-oauth2</artifactId>

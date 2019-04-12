@@ -2,6 +2,7 @@ package com.fish.blog.controller;
 
 import com.fish.blog.entity.PostEntity;
 import com.fish.blog.entity.PostRepository;
+import com.fish.blog.service.IPostService;
 import com.fish.user.util.AjaxResponseEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class PostController {
 	@Autowired
 	private PostRepository postRepository;
 
+	@Autowired
+	private IPostService postService;
+
     //TODO:每页显示的条数改为系统配置项
 	private Integer pageSize=10;
 
@@ -40,7 +44,8 @@ public class PostController {
 			page=1;
 		}
 		page=page-1;
-		Page<PostEntity> postEntities=postRepository.findAll(new PageRequest(page,pageSize));
+//		Page<PostEntity> postEntities=postRepository.findAll(new PageRequest(page,pageSize));
+		Page<PostEntity> postEntities=postService.getPostsPaging(new PageRequest(page,pageSize));
 		return new ResponseEntity<>(postEntities, HttpStatus.OK);
 	}
 

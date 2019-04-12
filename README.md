@@ -58,6 +58,7 @@ Maven 模块之间的依赖关系
 ## 使用方法
 
 - 安装配置好JDK，需要Java 1.8以上版本。
+- 安装配置好IDEA，并安装lombok插件，@Slf4j日志工具需要用到lombok，参考 https://blog.csdn.net/qq_26525215/article/details/79182628
 - 安装配置好maven，或者使用IDEA内置的maven。
 - 安装配置好Consul（默认HTTP端口是8500），以dev的方式启动agent（命令行执行consul agent -dev），其它配置请仔细参照官方文档：https://www.consul.io/ 。
 - 克隆项目到你的本地：git clone https://gitee.com/mumu-osc/nicefish-spring-cloud.git 。

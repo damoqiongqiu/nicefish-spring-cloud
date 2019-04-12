@@ -3,6 +3,7 @@ package com.fish.blog.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="blog_comment")
-public class CommentEntity {
+public class CommentEntity implements Serializable {
     @Id
     @Column(name="CommentId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
