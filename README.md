@@ -91,14 +91,6 @@ Maven 模块之间的依赖关系
 
 <img width="80%" src="./doc/8.png">
 
-## TODO
-
-近期已经列入计划的修改：
-- 尝试升级SpringBoot到2.x，升级SpringCloud到F版本
-- 继续修改前端NiceFish的代码，美化界面、完善功能
-- 引入Redis缓存
-- 引入Docker进行打包和部署
-
 ## 系列项目
 
 * NiceFish：美人鱼，这是一个微型 Blog 系统，前端基于 Angular 7.0 + PrimeNG 7.0.3。http://git.oschina.net/mumu-osc/NiceFish/
