@@ -59,7 +59,7 @@ Maven 模块之间的依赖关系
 
 - 安装配置好JDK，需要Java 1.8以上版本。
 - 安装配置好maven，或者使用IDEA内置的maven。
-- 安装配置好Consul（默认HTTP端口是8500），以dev的方式启动agent（命令行执行consul agent -dev），请仔细参照官方文档：https://www.consul.io/ 。
+- 安装配置好Consul（默认HTTP端口是8500），以dev的方式启动agent（命令行执行consul agent -dev），其它配置请仔细参照官方文档：https://www.consul.io/ 。
 - 克隆项目到你的本地：git clone https://gitee.com/mumu-osc/nicefish-spring-cloud.git 。
 - 安装配置好MySQL或者MariaDB，MySQL需要5.x以上，MariaDB需要10.x以上。
 - 在你本地的MySQL里面建一个库，名为nicefish，然后执行 /doc/nicefish.sql 建表。
