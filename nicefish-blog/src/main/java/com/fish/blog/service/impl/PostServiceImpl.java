@@ -38,6 +38,7 @@ public class PostServiceImpl implements IPostService {
     }
 
     @Override
+    @CacheEvict(value = "posts",allEntries = true)
     public void delPost(Integer id) {
         postRepository.delete(id);
     }

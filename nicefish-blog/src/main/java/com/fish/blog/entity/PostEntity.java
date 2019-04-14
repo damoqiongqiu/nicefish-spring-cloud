@@ -17,6 +17,8 @@ public class PostEntity implements Serializable {
     @Column(name="PostId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "BgImg")
+    private String bgImg;
     @Column(name="PostTitle")
     private String title;
     @Temporal(TemporalType.TIMESTAMP)
@@ -180,5 +182,13 @@ public class PostEntity implements Serializable {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public String getBgImg() {
+        return bgImg;
+    }
+
+    public void setBgImg(String bgImg) {
+        this.bgImg = bgImg;
     }
 }
