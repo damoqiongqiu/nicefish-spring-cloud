@@ -10,7 +10,6 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 @EnableCaching
@@ -48,9 +47,9 @@ public class RedisConfig extends CachingConfigurerSupport {
 
     private void setSerializer(StringRedisTemplate template){
         //备注：这里不能使用Jackson2JsonRedisSerializer，因为PageImpl这个实现类没有无参构造，Jackson无法反序列化
-        template.setHashKeySerializer(new StringRedisSerializer());
+        template.setHashKeySerializer(new JdkSerializationRedisSerializer());
         template.setHashValueSerializer(new JdkSerializationRedisSerializer());
-        template.setKeySerializer(new StringRedisSerializer());
+        template.setKeySerializer(new JdkSerializationRedisSerializer());
         template.setValueSerializer(new JdkSerializationRedisSerializer());
     }
 }

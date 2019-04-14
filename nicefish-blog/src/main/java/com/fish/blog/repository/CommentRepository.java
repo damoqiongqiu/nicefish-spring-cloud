@@ -14,7 +14,7 @@ import java.util.List;
  * @version 创建时间：2018-12-30 20:31
  */
 @Repository
-public interface ICommentRepository extends JpaRepository<CommentEntity, Integer> {
+public interface CommentRepository extends JpaRepository<CommentEntity, Integer> {
     @Query(value = "SELECT * FROM blog_comment WHERE post_id = ?1 ORDER BY ?#{#pageable}",
             countQuery = "SELECT count(*) FROM blog_comment WHERE post_id = ?1 ORDER BY ?#{#pageable}",
             nativeQuery = true)

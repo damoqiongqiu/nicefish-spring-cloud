@@ -29,7 +29,7 @@ public class PostController {
     private LoadBalancerClient loadBalancer;
 
     @Autowired
-    private IPostService<PostEntity> postService;
+    private IPostService postService;
 
     //TODO:每页显示的条数改为系统配置项
     private Integer pageSize=10;
