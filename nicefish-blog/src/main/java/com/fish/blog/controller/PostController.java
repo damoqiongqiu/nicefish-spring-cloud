@@ -1,7 +1,6 @@
 package com.fish.blog.controller;
 
 import com.fish.blog.entity.PostEntity;
-import com.fish.blog.entity.PostRepository;
 import com.fish.blog.service.IPostService;
 import com.fish.user.util.AjaxResponseEntity;
 import lombok.extern.slf4j.Slf4j;
@@ -29,12 +28,8 @@ public class PostController {
     @Autowired
     private LoadBalancerClient loadBalancer;
 
-    //TODO:全部移到postService里面去
     @Autowired
-    private PostRepository postRepository;
-
-    @Autowired
-    private IPostService postService;
+    private IPostService<PostEntity> postService;
 
     //TODO:每页显示的条数改为系统配置项
     private Integer pageSize=10;
@@ -51,7 +46,7 @@ public class PostController {
 
     @RequestMapping(value = "/post-detail/{id}",method = RequestMethod.GET)
     public ResponseEntity<Object> getPostDetail(@PathVariable(value = "id",required = true) Integer id){
-        return new ResponseEntity<>(postRepository.findOne(id), HttpStatus.OK);
+        return new ResponseEntity<>(postService.getOne(id), HttpStatus.OK);
     }
 
     @PreAuthorize("hasAnyRole('add_post')")
@@ -69,8 +64,9 @@ public class PostController {
         postEntity.setUserId((int)serviceResult.get("id"));
         postEntity.setEmail((String)serviceResult.get("email"));
         postEntity.setNickName(serviceResult.get("nickName")==null?"":serviceResult.get("nickName").toString());
+
         //TODO:返回的数据里面没有id，事务问题？
-        postEntity=postRepository.save(postEntity);
+        postService.savePost(postEntity);
         return new ResponseEntity<>(postEntity, HttpStatus.OK);
     }
 
@@ -90,7 +86,7 @@ public class PostController {
         postEntity.setEmail((String)serviceResult.get("email"));
         postEntity.setNickName(serviceResult.get("nickName")==null?"":serviceResult.get("nickName").toString());
         //TODO:返回的数据里面没有id，事务问题？
-        postEntity=postRepository.save(postEntity);
+        postService.savePost(postEntity);
         return new ResponseEntity<>(postEntity, HttpStatus.OK);
     }
 
@@ -103,8 +99,8 @@ public class PostController {
         }
         page=page-1;
 
-        List<PostEntity> postEntities=postRepository.findByUserIdAndPageing(userId,page*pageSize,pageSize);
-        Long totalElements=postRepository.countByUserId(userId);
+        List<PostEntity> postEntities=postService.findByUserIdAndPaging(userId,page*pageSize,pageSize);
+        Long totalElements=postService.countByUserId(userId);
         Integer totalPages=(int)(totalElements/pageSize+1);
 
         HashMap<String,Object> resultMap=new HashMap<String,Object>();
@@ -119,7 +115,7 @@ public class PostController {
     @PreAuthorize("hasAnyRole('del_post')")
     @RequestMapping(value = "/manage/del-post/{postId}",method = RequestMethod.DELETE)
     public ResponseEntity<Object> delPostById(@PathVariable(value="postId",required = true) Integer postId){
-        postRepository.delete(postId);
+        postService.delPost(postId);
         return new ResponseEntity<>(new AjaxResponseEntity(true,"删除成功"),HttpStatus.OK);
     }
 }

@@ -1,7 +1,7 @@
 package com.fish.blog.controller;
 
 import com.fish.blog.entity.CommentEntity;
-import com.fish.blog.entity.CommentRepository;
+import com.fish.blog.repository.ICommentRepository;
 import com.fish.user.util.AjaxResponseEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ import java.util.List;
 @RequestMapping("/blog")
 public class CommentController {
 	@Autowired
-	private CommentRepository commentRepository;
+	private ICommentRepository commentRepository;
 
 	//TODO:每页显示的条数改为系统配置项
 	private Integer pageSize=10;

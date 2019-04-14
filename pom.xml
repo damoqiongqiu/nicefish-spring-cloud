@@ -21,7 +21,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<!-- 注意不要改这里的版本号，目前新版本可能有冲突问题 -->
-		<version>1.5.9.RELEASE</version>
+		<version>1.5.19.RELEASE</version>
 		<relativePath/>
 	</parent>
 
